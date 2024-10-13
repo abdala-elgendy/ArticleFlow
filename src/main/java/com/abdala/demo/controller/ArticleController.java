@@ -31,7 +31,7 @@ public class ArticleController {
     // Get an article by ID
     @GetMapping("/{id}")
     public ArticleDTO getArticleById(@PathVariable Long id) {
-        return articleService.getArticleById(id);
+         return articleService.getArticleById(id);
     }
 
     // Update an article by ID
