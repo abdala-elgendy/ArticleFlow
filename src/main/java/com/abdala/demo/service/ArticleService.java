@@ -1,16 +1,18 @@
 package com.abdala.demo.service;
 
 import com.abdala.demo.entity.Article;
+import com.abdala.demo.service.dto.ArticleDTO;
+import com.abdala.demo.service.dto.CreateArticleDTO;
 
 import java.util.List;
 
 public interface ArticleService {
-    Article createArticle(Article article);
-    Article updateArticle(Long id, Article article);
+    ArticleDTO createArticle(CreateArticleDTO article);
+    ArticleDTO updateArticle(Long id, CreateArticleDTO article);
     void deleteArticle(Long id);
-    Article getArticleById(Long id);
-    List<Article> getAllArticles();
-    List<Article> getArticlesByAuthor(Long authorId);
+    ArticleDTO getArticleById(Long id);
+    List<ArticleDTO> getAllArticles();
+    List<ArticleDTO> getArticlesByAuthor(Long authorId);
 
-    List<Article> getArticlesByTagName(String tagName);
+    List<ArticleDTO> getArticlesByTagName(String tagName);
 }

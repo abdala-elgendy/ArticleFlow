@@ -6,7 +6,7 @@ import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleFavorite;
 import com.abdala.demo.entity.User;
 import com.abdala.demo.entity.UserFollow;
-import com.abdala.demo.service.dto.UserDTO;
+import com.abdala.demo.service.dto.CreateUserDTO;
 import com.abdala.demo.service.dto.UserDTO;
 
 
@@ -15,7 +15,7 @@ import java.util.List;
 public interface UserService {
 
 
-    User createUser(User teacherRequest);
+     UserDTO createUser(CreateUserDTO teacherRequest);
 
     void deleteUser(Long userId);
 

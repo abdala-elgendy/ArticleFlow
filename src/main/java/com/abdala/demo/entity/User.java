@@ -21,11 +21,8 @@ public class User {
 
     @Id
     @Column(name="id")
-    @GeneratedValue(generator = "Long")
-    @GenericGenerator(
-            name = "Long",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
 
     private Long id;
 

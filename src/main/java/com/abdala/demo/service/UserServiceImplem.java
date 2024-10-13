@@ -5,6 +5,7 @@ import com.abdala.demo.entity.ArticleFavorite;
 import com.abdala.demo.entity.User;
 import com.abdala.demo.entity.UserFollow;
 import com.abdala.demo.repository.UserRepo;
+import com.abdala.demo.service.dto.CreateUserDTO;
 import com.abdala.demo.service.dto.UserDTO;
 import com.abdala.demo.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class UserServiceImplem implements UserService{
     private UserMapper userMapper;
 
     @Override
-    public UserDTO createUser(User user) {
+    public UserDTO createUser(CreateUserDTO user) {
      return userRepo.save(user);
         ///     return userRepo.save(user);
 

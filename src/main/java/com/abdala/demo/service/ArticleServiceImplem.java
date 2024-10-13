@@ -1,13 +1,16 @@
 package com.abdala.demo.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.abdala.demo.entity.Article;
 import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.repository.UserRepo;
+import com.abdala.demo.service.dto.ArticleDTO;
+import com.abdala.demo.service.dto.CreateArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.abdala.demo.service.mapper.ArticleMapper;
 @Service
 public class ArticleServiceImplem implements ArticleService {
 
@@ -15,22 +18,24 @@ public class ArticleServiceImplem implements ArticleService {
     private ArticleRepo articleRepository;
 
     @Autowired
-    private UserRepo userRepository;
+    private ArticleMapper articleMapper;
 
     @Override
-    public Article createArticle(Article article) {
-        return articleRepository.save(article);
+    public ArticleDTO createArticle(CreateArticleDTO createArticleDTO) {
+        Article article = articleMapper.toEntity(createArticleDTO);
+        Article savedArticle = articleRepository.save(article);
+        return articleMapper.toDTO(savedArticle);
     }
 
     @Override
-    public Article updateArticle(Long id, Article article) {
+    public ArticleDTO updateArticle(Long id, CreateArticleDTO updateArticleDTO) {
         return articleRepository.findById(id).map(existingArticle -> {
-            existingArticle.setContent(article.getContent());
-            existingArticle.setDescription(article.getDescription());
-
-            existingArticle.setTitle(article.getTitle());
-            return articleRepository.save(existingArticle);
-        }).orElseThrow(() -> new RuntimeException("Article not found with id: " + id));
+            existingArticle.setTitle(updateArticleDTO.getTitle());
+            existingArticle.setDescription(updateArticleDTO.getDescription());
+            existingArticle.setContent(updateArticleDTO.getContent());
+            Article updatedArticle = articleRepository.save(existingArticle);
+            return articleMapper.toDTO(updatedArticle);
+        }).orElseThrow(() -> new RuntimeException("Article not found"));
     }
 
     @Override
@@ -39,23 +44,31 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public Article getArticleById(Long id) {
+    public ArticleDTO getArticleById(Long id) {
         return articleRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Article not found with id: " + id));
+                .map(articleMapper::toDTO)
+                .orElseThrow(() -> new RuntimeException("Article not found"));
     }
 
     @Override
-    public List<Article> getAllArticles() {
-        return articleRepository.findAll();
+    public List<ArticleDTO> getAllArticles() {
+        List<Article> articles = articleRepository.findAll();
+        return articles.stream()
+                .map(articleMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<Article> getArticlesByAuthor(Long authorId) {
-        return articleRepository.findByAuthorId(authorId);
+    public List<ArticleDTO> getArticlesByAuthor(Long id) {
+       // return articleRepository.findByAuthorId(authorId);
+
+        return articleRepository.findById(id)
+                .map(articleMapper::toDTO)
+                .stream().collect(Collectors.toList());
     }
 
     @Override
-    public List<Article> getArticlesByTagName(String tagName) {
+    public List<ArticleDTO> getArticlesByTagName(String tagName) {
         return articleRepository.findArticlesByTagName(tagName); // or findByTagsName(tagName)
     }
 }

@@ -12,6 +12,8 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+
     @Column(name="content")
     private String content;
 
@@ -25,6 +27,16 @@ public class Article {
     @Column(name="created_at")
     private LocalDateTime createdAt;
 
+   @Column (name="tag_name")
+   private String tagName;
+
+    public String getTagName() {
+        return tagName;
+    }
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
 
     @ManyToOne
     @JoinColumn(name = "author_id")
