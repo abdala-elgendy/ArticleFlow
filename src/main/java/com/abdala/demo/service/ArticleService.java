@@ -11,4 +11,6 @@ public interface ArticleService {
     Article getArticleById(Long id);
     List<Article> getAllArticles();
     List<Article> getArticlesByAuthor(Long authorId);
+
+    List<Article> getArticlesByTagName(String tagName);
 }

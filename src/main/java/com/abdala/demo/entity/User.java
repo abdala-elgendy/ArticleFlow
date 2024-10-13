@@ -21,9 +21,9 @@ public class User {
 
     @Id
     @Column(name="id")
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue(generator = "Long")
     @GenericGenerator(
-            name = "UUID",
+            name = "Long",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
 

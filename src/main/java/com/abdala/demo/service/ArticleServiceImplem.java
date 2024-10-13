@@ -7,7 +7,6 @@ import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class ArticleServiceImplem implements ArticleService {
@@ -53,6 +52,11 @@ public class ArticleServiceImplem implements ArticleService {
     @Override
     public List<Article> getArticlesByAuthor(Long authorId) {
         return articleRepository.findByAuthorId(authorId);
+    }
+
+    @Override
+    public List<Article> getArticlesByTagName(String tagName) {
+        return articleRepository.findArticlesByTagName(tagName); // or findByTagsName(tagName)
     }
 }
 

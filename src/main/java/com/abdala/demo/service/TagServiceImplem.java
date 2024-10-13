@@ -19,7 +19,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Tag getTagByName(String name) {
-        return tagRepo.findByName(name)
+        return tagRepo.findArticlesByName(name)
                 .orElseThrow(() -> new RuntimeException("Tag not found with name: " + name));
     }
 

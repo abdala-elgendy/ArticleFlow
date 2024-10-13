@@ -12,9 +12,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserDTO {
 
-
+  private Long id;
     private   String bio ;
 
+    public String getBio() {
+        return bio;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     private   String password ;
 
@@ -23,4 +42,9 @@ public class UserDTO {
 
 
     private String email ;
+
+
+    public void setId(Long id){
+        this.id=id;
+    }
 }
