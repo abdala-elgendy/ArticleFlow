@@ -3,9 +3,15 @@ package com.abdala.demo.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "articles")
+@Data
+
 public class Article {
 
     @Id
@@ -84,6 +90,7 @@ public class Article {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;

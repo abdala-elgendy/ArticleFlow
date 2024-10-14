@@ -6,9 +6,17 @@ import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleFavorite;
 import com.abdala.demo.entity.User;
 import com.abdala.demo.entity.UserFollow;
+import com.abdala.demo.repository.ArticleRepo;
+import com.abdala.demo.repository.UserRepo;
 import com.abdala.demo.service.UserService;
+import com.abdala.demo.service.dto.ArticleDTO;
+import com.abdala.demo.service.dto.CreateUserDTO;
+import com.abdala.demo.service.dto.UpdateUserDTO;
 import com.abdala.demo.service.dto.UserDTO;
+import com.abdala.demo.service.mapper.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,21 +26,34 @@ import java.util.List;
 public class UserController {
 
     @Autowired
+    private UserRepo userRepository;
+
+    @Autowired
+    private ArticleRepo articleRepository;
+
+    @Autowired
+    private ArticleMapper articleMapper;
+
+    @Autowired
     private UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public  ResponseEntity<UserDTO> createUser(@RequestBody CreateUserDTO createUserDTO) {
+        UserDTO userDTO = userService.createUser(createUserDTO);
+        return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        UserDTO userDTO = userService.getUserById(id);
+        return ResponseEntity.ok(userDTO);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        return userService.updateUser(id, user);
+    public ResponseEntity<UserDTO>  updateUser(@PathVariable Long id, @RequestBody UpdateUserDTO updateUserDTO) {
+
+        UserDTO updatedUser = userService.updateUser(id, updateUserDTO);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -40,19 +61,25 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @GetMapping
-    public List<Article> getUserArticles(@PathVariable Long id) {
-        return userService.getUserArticles(id);
+
+
+    @GetMapping("/{userId}/articles")
+    public ResponseEntity<List<ArticleDTO>> getUserArticles(@PathVariable Long userId) {
+        List<ArticleDTO> articles = userService.getUserArticles(userId);
+        return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
-    @GetMapping
-    public List<ArticleFavorite> getUserArticleFavorites(@PathVariable Long id) {
-        return userService.getUserArticleFavorites(id);
+
+    @DeleteMapping("/{userId}/unfollow/{unfollowUserId}")
+    public ResponseEntity<Void> unfollowUser(@PathVariable Long userId, @PathVariable Long unfollowUserId) {
+        userService.unfollowUser(userId, unfollowUserId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping
-    public List<UserFollow> getUserFollow(@PathVariable Long id) {
-        return userService.getUserFollow(id);
+    @GetMapping("/{userId}/following")
+    public ResponseEntity<List<UserDTO>> getUserFollow(@PathVariable Long userId) {
+        List<UserDTO> following = userService.getUserFollow(userId);
+        return new ResponseEntity<>(following, HttpStatus.OK);
     }
 }
 

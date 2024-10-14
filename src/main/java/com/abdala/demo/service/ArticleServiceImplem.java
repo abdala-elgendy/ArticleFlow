@@ -18,6 +18,9 @@ public class ArticleServiceImplem implements ArticleService {
     private ArticleRepo articleRepository;
 
     @Autowired
+    private UserRepo userRepository;
+
+    @Autowired
     private ArticleMapper articleMapper;
 
     @Override
@@ -69,7 +72,10 @@ public class ArticleServiceImplem implements ArticleService {
 
     @Override
     public List<ArticleDTO> getArticlesByTagName(String tagName) {
-        return articleRepository.findArticlesByTagName(tagName); // or findByTagsName(tagName)
+        List<Article> articles = articleRepository.findArticlesByTagName(tagName);
+        return articles.stream()
+                .map(articleMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }
 

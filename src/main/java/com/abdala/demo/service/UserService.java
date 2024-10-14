@@ -6,7 +6,9 @@ import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleFavorite;
 import com.abdala.demo.entity.User;
 import com.abdala.demo.entity.UserFollow;
+import com.abdala.demo.service.dto.ArticleDTO;
 import com.abdala.demo.service.dto.CreateUserDTO;
+import com.abdala.demo.service.dto.UpdateUserDTO;
 import com.abdala.demo.service.dto.UserDTO;
 
 
@@ -14,20 +16,23 @@ import java.util.List;
 
 public interface UserService {
 
+    void followUser(Long userId, Long followUserId);
+    void unfollowUser(Long userId, Long unfollowUserId);
 
-     UserDTO createUser(CreateUserDTO teacherRequest);
+    UserDTO createUser(CreateUserDTO teacherRequest);
 
     void deleteUser(Long userId);
 
-    User updateUser(Long id,User user);
+    UserDTO  updateUser(Long id, UpdateUserDTO user);
 
-    User getUserById(Long userId);
+    UserDTO getUserById(Long userId);
 
-    List<Article> getUserArticles(Long userId);
+    List<ArticleDTO> getUserArticles(Long userId);
 
-    List<ArticleFavorite> getUserArticleFavorites(Long userId);
+    List<ArticleDTO> getUserArticleFavorites(Long userId);
 
-    List<UserFollow> getUserFollow(Long userId);
-    List<User> getUsers();
+    List<UserDTO> getUserFollow(Long userId);
+
+
 
 }

@@ -14,8 +14,12 @@ import java.util.List;
 public interface ArticleRepo extends JpaRepository<Article, Long> {
 
     @Query("SELECT a FROM Article a  WHERE a.tagName = :tagName")
-    List<ArticleDTO> findArticlesByTagName(@Param("tagName") String tagName);
+    List<Article> findArticlesByTagName(@Param("tagName") String tagName);
 
   @Query("select a from Article a join User x where x.id=:authorId")
-    List<CreateArticleDTO> findByAuthorId(Long authorId);
+    List<Article> findByAuthorId(Long authorId);
+
+    List<Article> findFavoriteArticlesByUserId(Long userId);
+
+
 }

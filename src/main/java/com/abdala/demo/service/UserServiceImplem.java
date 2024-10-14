@@ -4,80 +4,116 @@ import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleFavorite;
 import com.abdala.demo.entity.User;
 import com.abdala.demo.entity.UserFollow;
+import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.repository.UserRepo;
+import com.abdala.demo.service.dto.ArticleDTO;
 import com.abdala.demo.service.dto.CreateUserDTO;
+import com.abdala.demo.service.dto.UpdateUserDTO;
 import com.abdala.demo.service.dto.UserDTO;
+import com.abdala.demo.service.mapper.ArticleMapper;
 import com.abdala.demo.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
 public class UserServiceImplem implements UserService{
 
-      @Autowired
-    private UserRepo userRepo ;
+    @Autowired
+    private UserRepo userRepository;
 
     @Autowired
+    private ArticleRepo articleRepository;
 
+    @Autowired
     private UserMapper userMapper;
 
-    @Override
-    public UserDTO createUser(CreateUserDTO user) {
-     return userRepo.save(user);
-        ///     return userRepo.save(user);
+    @Autowired
+    private ArticleMapper articleMapper;
 
+
+    @Override
+    public void followUser(Long userId, Long followUserId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        User followUser = userRepository.findById(followUserId)
+                .orElseThrow(() -> new RuntimeException("User to follow not found"));
+
+        // Assuming a many-to-many relation where a user can follow many users
+        user.getFollowing().add(followUser);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void unfollowUser(Long userId, Long unfollowUserId) {
+
+    }
+
+    @Override
+    public UserDTO createUser(CreateUserDTO createUserDTO) {
+        User user = userMapper.toEntity(createUserDTO);
+        user = userRepository.save(user);
+        return userMapper.toDTO(user);
     }
 
 
 
     @Override
     public void deleteUser(Long userId) {
-   userRepo.deleteById(userId);
+        userRepository.deleteById(userId);
     }
 
 
 
 
     @Override
-    public User updateUser(Long id,User user) {
-        Optional<User> existingUser = userRepo.findById(id);
-        if (existingUser.isPresent()) {
-            User updatedUser = existingUser.get();
-            updatedUser.setName(user.getName());
-            updatedUser.setEmail(user.getEmail());
-            updatedUser.setBio(user.getBio());
+    public UserDTO  updateUser(Long id, UpdateUserDTO updateUserDTO) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-            return userRepo.save(updatedUser);
-        }
-        throw new RuntimeException("User not found with id: " + id);
+        // Update user fields based on updateUserDTO
+        user.setName(updateUserDTO.getName());
+        user.setBio(updateUserDTO.getBio());
+        user.setEmail(updateUserDTO.getEmail());
+
+        // Save updated user
+        user = userRepository.save(user);
+        return userMapper.toDTO(user);
     }
 
     @Override
-    public User getUserById(Long userId) {
+    public UserDTO getUserById(Long userId) {
         return null;
     }
 
     @Override
-    public List<Article> getUserArticles(Long userId) {
-        return List.of();
+    public List<ArticleDTO> getUserArticles(Long userId) {
+        List<Article> articles = articleRepository.findByAuthorId(userId);
+        return articles.stream()
+                .map(articleMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<ArticleFavorite> getUserArticleFavorites(Long userId) {
-        return List.of();
+    public List<ArticleDTO> getUserArticleFavorites(Long userId) {
+        List<Article> favoriteArticles = articleRepository.findFavoriteArticlesByUserId(userId);
+        return favoriteArticles.stream()
+                .map(articleMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<UserFollow> getUserFollow(Long userId) {
-        return List.of();
+    public List<UserDTO> getUserFollow(Long userId) {
+
+        List<User> followedUsers = userRepository.findFollowedUsersByUserId(userId);
+        return followedUsers.stream()
+                .map(userMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    @Override
-    public List<User> getUsers() {
-        return List.of();
-    }
+
 }
