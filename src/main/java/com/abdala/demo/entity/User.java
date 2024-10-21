@@ -19,7 +19,7 @@ import java.util.UUID;
 
 public class User {
 
-    // define fields
+  
 
     @Id
     @Column(name="id")
@@ -57,7 +57,7 @@ public class User {
     @ManyToMany(mappedBy = "following")
     private Set<User> followers = new HashSet<>();
 
-    // One-to-many relationship with articles (User can have many articles)
+ 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Article> articles = new HashSet<>();
     public LocalDateTime getCreatedAt() {
@@ -80,8 +80,6 @@ public class User {
     }
 
 
-
-    // define getter/setter
 
     public Long getId() {
         return id;
