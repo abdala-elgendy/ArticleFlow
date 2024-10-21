@@ -14,5 +14,5 @@ public interface TagService {
     List<TagDTO> getAllTags();
 
     TagDTO getTagById(Long id);
-    // void deleteTag(String name);
+
 }
