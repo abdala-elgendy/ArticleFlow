@@ -29,7 +29,7 @@ public class UserFollow {
         this.createdAt = LocalDateTime.now();
     }
 
-    // Getters and Setters
+  
     public Long getId() {
         return id;
     }
