@@ -11,6 +11,6 @@ public class ArticleDTO {
     private String content;
    private String tagName;
     private LocalDateTime createdAt;
-  //  private LocalDateTime updatedAt;
+ 
 }
 
