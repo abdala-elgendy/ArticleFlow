@@ -4,7 +4,9 @@ package com.abdala.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -13,7 +15,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name="User")
-
+@Data
 
 public class User {
 
@@ -39,7 +41,7 @@ public class User {
     @Column(name="email")
     private String email;
 
- @Column(name="created_at")
+    @Column(name="created_at")
     private LocalDateTime createdAt;
 
 
@@ -55,7 +57,7 @@ public class User {
     @ManyToMany(mappedBy = "following")
     private Set<User> followers = new HashSet<>();
 
-    // One-to-many relationship with articles (User can have many articles)
+
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Article> articles = new HashSet<>();
     public LocalDateTime getCreatedAt() {
@@ -76,8 +78,6 @@ public class User {
 
         this.email = email;
     }
-
-
 
 
 
