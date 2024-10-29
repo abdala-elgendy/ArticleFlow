@@ -4,9 +4,7 @@ package com.abdala.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
+
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -15,11 +13,11 @@ import java.util.UUID;
 
 @Entity
 @Table(name="User")
-@Data
+
 
 public class User {
 
-    // define fields
+
 
     @Id
     @Column(name="id")
@@ -81,7 +79,7 @@ public class User {
 
 
 
-    // define getter/setter
+
 
     public Long getId() {
         return id;

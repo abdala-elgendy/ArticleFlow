@@ -17,6 +17,14 @@ public class UserDTO {
   private Long id;
     private   String bio ;
     private LocalDateTime createdAt;
+    private   String password ;
+
+
+    private String Name ;
+
+
+    private String email ;
+
     public String getBio() {
         return bio;
     }
@@ -61,13 +69,7 @@ public class UserDTO {
         this.createdAt = createdAt;
     }
 
-    private   String password ;
 
-
-    private String Name ;
-
-
-    private String email ;
 
 
     public void setId(Long id){

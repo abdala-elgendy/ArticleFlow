@@ -27,7 +27,7 @@ public class ArticleTag {
         this.createdAt = LocalDateTime.now();
     }
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }

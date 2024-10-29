@@ -3,14 +3,12 @@ package com.abdala.demo.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "articles")
-@Data
+
 
 public class Article {
 
@@ -53,7 +51,7 @@ public class Article {
 
     }
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -96,13 +94,6 @@ public class Article {
         this.createdAt = createdAt;
     }
 
-//    public LocalDateTime getUpdatedAt() {
-//        return updatedt;
-//    }
-//
-//    public void setUpdatedAt(LocalDateTime updatedAt) {
-//        this.updatedAt = updatedAt;
-//    }
 
     public User getAuthor() {
         return author;
