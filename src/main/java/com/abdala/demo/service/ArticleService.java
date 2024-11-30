@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface ArticleService {
     ArticleDTO createArticle(CreateArticleDTO article);
-    ArticleDTO updateArticle(Long id, CreateArticleDTO article);
-    void deleteArticle(Long id);
-    ArticleDTO getArticleById(Long id);
+    ArticleDTO updateArticle(Integer id, CreateArticleDTO article);
+    void deleteArticle(Integer id);
+    ArticleDTO getArticleById(Integer id);
     List<ArticleDTO> getAllArticles();
-    List<ArticleDTO> getArticlesByAuthor(Long authorId);
+    List<ArticleDTO> getArticlesByAuthor(Integer authorId);
 
-    List<ArticleDTO> getArticlesByTagName(String tagName);
+//    List<ArticleDTO> getArticlesByTagName(String tagName);
 }

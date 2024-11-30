@@ -16,22 +16,22 @@ import java.util.List;
 
 public interface UserService {
 
-    void followUser(Long userId, Long followUserId);
-    void unfollowUser(Long userId, Long unfollowUserId);
+    void followUser(Integer userId, Integer followUserId);
+    void unfollowUser(Integer userId, Integer unfollowUserId);
 
     UserDTO createUser(CreateUserDTO teacherRequest);
 
-    void deleteUser(Long userId);
+    void deleteUser(Integer userId);
 
-    UserDTO  updateUser(Long id, UpdateUserDTO user);
+    UserDTO  updateUser(Integer id, UpdateUserDTO user);
 
-    UserDTO getUserById(Long userId);
+    UserDTO getUserById(Integer userId);
 
-    List<ArticleDTO> getUserArticles(Long userId);
+    List<ArticleDTO> getUserArticles(Integer userId);
 
-    List<ArticleDTO> getUserArticleFavorites(Long userId);
+    List<ArticleDTO> getUserArticleFavorites(Integer userId);
 
-    List<UserDTO> getUserFollow(Long userId);
+    List<UserDTO> getUserFollow(Integer userId);
 
 
 

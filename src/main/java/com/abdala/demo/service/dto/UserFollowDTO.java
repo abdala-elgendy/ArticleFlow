@@ -6,8 +6,8 @@ import java.util.UUID;
 
 @Data
 public class UserFollowDTO {
-    private UUID id;
-    private UUID followedUserId;
+    private Integer id;
+    private Integer followedUserId;
     private LocalDateTime createdAt;
 }
 

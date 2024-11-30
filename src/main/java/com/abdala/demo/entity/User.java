@@ -5,16 +5,13 @@ package com.abdala.demo.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
-@Table(name="User")
+@Table(name="user")
 @Data
 
 public class User {
@@ -26,7 +23,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
 
-    private Long id;
+    private Integer id;
 
     @Column(name="bio")
     private String bio;
@@ -81,11 +78,11 @@ public class User {
 
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

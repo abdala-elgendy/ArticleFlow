@@ -37,7 +37,7 @@ public class UserServiceImplem implements UserService{
 
 
     @Override
-    public void followUser(Long userId, Long followUserId) {
+    public void followUser(Integer userId, Integer followUserId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         User followUser = userRepository.findById(followUserId)
@@ -49,7 +49,7 @@ public class UserServiceImplem implements UserService{
     }
 
     @Override
-    public void unfollowUser(Long userId, Long unfollowUserId) {
+    public void unfollowUser(Integer userId, Integer unfollowUserId) {
 
     }
 
@@ -63,7 +63,7 @@ public class UserServiceImplem implements UserService{
 
 
     @Override
-    public void deleteUser(Long userId) {
+    public void deleteUser(Integer userId) {
         userRepository.deleteById(userId);
     }
 
@@ -71,7 +71,7 @@ public class UserServiceImplem implements UserService{
 
 
     @Override
-    public UserDTO  updateUser(Long id, UpdateUserDTO updateUserDTO) {
+    public UserDTO  updateUser(Integer id, UpdateUserDTO updateUserDTO) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -86,12 +86,12 @@ public class UserServiceImplem implements UserService{
     }
 
     @Override
-    public UserDTO getUserById(Long userId) {
+    public UserDTO getUserById(Integer userId) {
         return null;
     }
 
     @Override
-    public List<ArticleDTO> getUserArticles(Long userId) {
+    public List<ArticleDTO> getUserArticles(Integer userId) {
         List<Article> articles = articleRepository.findByAuthorId(userId);
         return articles.stream()
                 .map(articleMapper::toDTO)
@@ -99,7 +99,7 @@ public class UserServiceImplem implements UserService{
     }
 
     @Override
-    public List<ArticleDTO> getUserArticleFavorites(Long userId) {
+    public List<ArticleDTO> getUserArticleFavorites(Integer userId) {
         List<Article> favoriteArticles = articleRepository.findFavoriteArticlesByUserId(userId);
         return favoriteArticles.stream()
                 .map(articleMapper::toDTO)
@@ -107,7 +107,7 @@ public class UserServiceImplem implements UserService{
     }
 
     @Override
-    public List<UserDTO> getUserFollow(Long userId) {
+    public List<UserDTO> getUserFollow(Integer userId) {
 
         List<User> followedUsers = userRepository.findFollowedUsersByUserId(userId);
         return followedUsers.stream()

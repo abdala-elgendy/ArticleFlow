@@ -21,10 +21,10 @@ public class ArticleController {
     private ArticleMapper articleMapper;
 
 
-    @GetMapping("/tag/{tagName}")
-    public List<ArticleDTO> getArticlesByTagName(@PathVariable String tagName) {
-        return articleService.getArticlesByTagName(tagName);
-    }
+//    @GetMapping("/tag/{tagName}")
+//    public List<ArticleDTO> getArticlesByTagName(@PathVariable String tagName) {
+//        return articleService.getArticlesByTagName(tagName);
+//    }
 
 
     @PostMapping
@@ -34,12 +34,12 @@ public class ArticleController {
 
 
     @GetMapping("/{id}")
-    public ArticleDTO getArticleById(@PathVariable Long id) {
+    public ArticleDTO getArticleById(@PathVariable Integer id) {
         return articleService.getArticleById(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ArticleDTO> updateArticle(@PathVariable Long id, @RequestBody CreateArticleDTO updateArticleDTO) {
+    public ResponseEntity<ArticleDTO> updateArticle(@PathVariable Integer id, @RequestBody CreateArticleDTO updateArticleDTO) {
         ArticleDTO updatedArticle = articleService.updateArticle(id, updateArticleDTO);
         return ResponseEntity.ok(updatedArticle);
     }

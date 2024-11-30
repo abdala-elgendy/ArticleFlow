@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UserDTO {
 
-  private Long id;
+  private Integer id;
     private   String bio ;
     private LocalDateTime createdAt;
     private   String password ;
@@ -41,7 +41,7 @@ public class UserDTO {
         return email;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -72,7 +72,7 @@ public class UserDTO {
 
 
 
-    public void setId(Long id){
+    public void setId(Integer id){
         this.id=id;
     }
 }

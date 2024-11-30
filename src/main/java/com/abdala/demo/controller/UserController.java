@@ -44,40 +44,40 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id) {
         UserDTO userDTO = userService.getUserById(id);
         return ResponseEntity.ok(userDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO>  updateUser(@PathVariable Long id, @RequestBody UpdateUserDTO updateUserDTO) {
+    public ResponseEntity<UserDTO>  updateUser(@PathVariable Integer id, @RequestBody UpdateUserDTO updateUserDTO) {
 
         UserDTO updatedUser = userService.updateUser(id, updateUserDTO);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
+    public void deleteUser(@PathVariable Integer id) {
         userService.deleteUser(id);
     }
 
 
 
     @GetMapping("/{userId}/articles")
-    public ResponseEntity<List<ArticleDTO>> getUserArticles(@PathVariable Long userId) {
+    public ResponseEntity<List<ArticleDTO>> getUserArticles(@PathVariable Integer userId) {
         List<ArticleDTO> articles = userService.getUserArticles(userId);
         return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
 
     @DeleteMapping("/{userId}/unfollow/{unfollowUserId}")
-    public ResponseEntity<Void> unfollowUser(@PathVariable Long userId, @PathVariable Long unfollowUserId) {
+    public ResponseEntity<Void> unfollowUser(@PathVariable Integer userId, @PathVariable Integer unfollowUserId) {
         userService.unfollowUser(userId, unfollowUserId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/following")
-    public ResponseEntity<List<UserDTO>> getUserFollow(@PathVariable Long userId) {
+    public ResponseEntity<List<UserDTO>> getUserFollow(@PathVariable Integer userId) {
         List<UserDTO> following = userService.getUserFollow(userId);
         return new ResponseEntity<>(following, HttpStatus.OK);
     }

@@ -11,7 +11,7 @@ public class ArticleTag {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private LocalDateTime createdAt;
 
@@ -28,11 +28,11 @@ public class ArticleTag {
     }
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void Integer(Integer id) {
         this.id = id;
     }
 

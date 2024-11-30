@@ -30,7 +30,7 @@ public class UserServiceImplTest {
     @Test
     public void testCreateUser() {
         UserDTO user = new UserDTO();
-        user.setId(1L);
+        user.setId(1);
         user.setName("John Doe");
 
         when(userRepository.save(any(User.class))).thenReturn(user);

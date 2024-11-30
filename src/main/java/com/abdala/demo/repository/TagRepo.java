@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface TagRepo extends JpaRepository<Tag,Long> {
 
-    @Query(value="select t from Tag t where :name member of t.name" )
-    List<Article>  findArticlesByName(@Param("name")String name);
+//    @Query(value="select t from Tag t where :name member of t.name" )
+//    List<Article>  findArticlesByName(@Param("name")String name);
 }
 

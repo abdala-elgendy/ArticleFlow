@@ -31,7 +31,7 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public ArticleDTO updateArticle(Long id, CreateArticleDTO updateArticleDTO) {
+    public ArticleDTO updateArticle(Integer id, CreateArticleDTO updateArticleDTO) {
         return articleRepository.findById(id).map(existingArticle -> {
             existingArticle.setTitle(updateArticleDTO.getTitle());
             existingArticle.setDescription(updateArticleDTO.getDescription());
@@ -42,12 +42,12 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public void deleteArticle(Long id) {
+    public void deleteArticle(Integer id) {
         articleRepository.deleteById(id);
     }
 
     @Override
-    public ArticleDTO getArticleById(Long id) {
+    public ArticleDTO getArticleById(Integer id) {
         return articleRepository.findById(id)
                 .map(articleMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("Article not found"));
@@ -62,7 +62,7 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public List<ArticleDTO> getArticlesByAuthor(Long id) {
+    public List<ArticleDTO> getArticlesByAuthor(Integer id) {
        // return articleRepository.findByAuthorId(authorId);
 
         return articleRepository.findById(id)
@@ -70,13 +70,13 @@ public class ArticleServiceImplem implements ArticleService {
                 .stream().collect(Collectors.toList());
     }
 
-    @Override
-    public List<ArticleDTO> getArticlesByTagName(String tagName) {
-        List<Article> articles = articleRepository.findArticlesByTagName(tagName);
-        return articles.stream()
-                .map(articleMapper::toDTO)
-                .collect(Collectors.toList());
-    }
+//    @Override
+//    public List<ArticleDTO> getArticlesByTagName(String tagName) {
+//        List<Article> articles = articleRepository.findArticlesByTagName(tagName);
+//        return articles.stream()
+//                .map(articleMapper::toDTO)
+//                .collect(Collectors.toList());
+//    }
 }
 
 
