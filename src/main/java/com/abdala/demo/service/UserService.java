@@ -27,9 +27,9 @@ public interface UserService {
 
     UserDTO getUserById(Integer userId);
 
-    List<ArticleDTO> getUserArticles(Integer userId);
+  //  List<ArticleDTO> getUserArticles(Integer userId);
 
-    List<ArticleDTO> getUserArticleFavorites(Integer userId);
+   // List<ArticleDTO> getUserArticleFavorites(Integer userId);
 
     List<UserDTO> getUserFollow(Integer userId);
 

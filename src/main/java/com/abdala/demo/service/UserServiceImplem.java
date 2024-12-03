@@ -90,21 +90,21 @@ public class UserServiceImplem implements UserService{
         return null;
     }
 
-    @Override
-    public List<ArticleDTO> getUserArticles(Integer userId) {
-        List<Article> articles = articleRepository.findByAuthorId(userId);
-        return articles.stream()
-                .map(articleMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<ArticleDTO> getUserArticleFavorites(Integer userId) {
-        List<Article> favoriteArticles = articleRepository.findFavoriteArticlesByUserId(userId);
-        return favoriteArticles.stream()
-                .map(articleMapper::toDTO)
-                .collect(Collectors.toList());
-    }
+//    @Override
+//    public List<ArticleDTO> getUserArticles(Integer userId) {
+//        List<Article> articles = articleRepository.findByAuthorId(userId);
+//        return articles.stream()
+//                .map(articleMapper::toDTO)
+//                .collect(Collectors.toList());
+//    }
+//
+//    @Override
+//    public List<ArticleDTO> getUserArticleFavorites(Integer userId) {
+//        List<Article> favoriteArticles = articleRepository.findFavoriteArticlesByUserId(userId);
+//        return favoriteArticles.stream()
+//                .map(articleMapper::toDTO)
+//                .collect(Collectors.toList());
+//    }
 
     @Override
     public List<UserDTO> getUserFollow(Integer userId) {

@@ -63,11 +63,11 @@ public class UserController {
 
 
 
-    @GetMapping("/{userId}/articles")
-    public ResponseEntity<List<ArticleDTO>> getUserArticles(@PathVariable Integer userId) {
-        List<ArticleDTO> articles = userService.getUserArticles(userId);
-        return new ResponseEntity<>(articles, HttpStatus.OK);
-    }
+//    @GetMapping("/{userId}/articles")
+//    public ResponseEntity<List<ArticleDTO>> getUserArticles(@PathVariable Integer userId) {
+//        List<ArticleDTO> articles = userService.getUserArticles(userId);
+//        return new ResponseEntity<>(articles, HttpStatus.OK);
+//    }
 
 
     @DeleteMapping("/{userId}/unfollow/{unfollowUserId}")

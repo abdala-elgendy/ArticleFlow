@@ -3,6 +3,7 @@ package com.abdala.demo.entity;
 
 
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -43,6 +44,7 @@ public class Article {
     }
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "author_id")
     private User author;
 
