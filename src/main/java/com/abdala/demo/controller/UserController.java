@@ -3,9 +3,9 @@ package com.abdala.demo.controller;
 
 
 import com.abdala.demo.entity.Article;
-import com.abdala.demo.entity.ArticleFavorite;
+//import com.abdala.demo.entity.ArticleFavorite;
 import com.abdala.demo.entity.User;
-import com.abdala.demo.entity.UserFollow;
+//import com.abdala.demo.entity.UserFollow;
 import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.repository.UserRepo;
 import com.abdala.demo.service.UserService;
@@ -25,14 +25,14 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
-    private UserRepo userRepository;
-
-    @Autowired
-    private ArticleRepo articleRepository;
-
-    @Autowired
-    private ArticleMapper articleMapper;
+//    @Autowired
+//    private UserRepo userRepository;
+//
+//    @Autowired
+//    private ArticleRepo articleRepository;
+//
+//    @Autowired
+//    private ArticleMapper articleMapper;
 
     @Autowired
     private UserService userService;
@@ -44,20 +44,20 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id) {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable int id) {
         UserDTO userDTO = userService.getUserById(id);
         return ResponseEntity.ok(userDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO>  updateUser(@PathVariable Integer id, @RequestBody UpdateUserDTO updateUserDTO) {
+    public ResponseEntity<UserDTO>  updateUser(@PathVariable int  id, @RequestBody UpdateUserDTO updateUserDTO) {
 
         UserDTO updatedUser = userService.updateUser(id, updateUserDTO);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Integer id) {
+    public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
     }
 
@@ -69,17 +69,17 @@ public class UserController {
 //        return new ResponseEntity<>(articles, HttpStatus.OK);
 //    }
 
+//
+//    @DeleteMapping("/{userId}/unfollow/{unfollowUserId}")
+//    public ResponseEntity<Void> unfollowUser(@PathVariable Integer userId, @PathVariable Integer unfollowUserId) {
+//        userService.unfollowUser(userId, unfollowUserId);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
-    @DeleteMapping("/{userId}/unfollow/{unfollowUserId}")
-    public ResponseEntity<Void> unfollowUser(@PathVariable Integer userId, @PathVariable Integer unfollowUserId) {
-        userService.unfollowUser(userId, unfollowUserId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/{userId}/following")
-    public ResponseEntity<List<UserDTO>> getUserFollow(@PathVariable Integer userId) {
-        List<UserDTO> following = userService.getUserFollow(userId);
-        return new ResponseEntity<>(following, HttpStatus.OK);
-    }
+//    @GetMapping("/{userId}/following")
+//    public ResponseEntity<List<UserDTO>> getUserFollow(@PathVariable Integer userId) {
+//        List<UserDTO> following = userService.getUserFollow(userId);
+//        return new ResponseEntity<>(following, HttpStatus.OK);
+//    }
 }
 

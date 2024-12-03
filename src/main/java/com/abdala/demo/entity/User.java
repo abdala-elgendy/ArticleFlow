@@ -23,7 +23,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
 
-    private Integer id;
+    private int id;
 
     @Column(name="bio")
     private String bio;
@@ -41,18 +41,6 @@ public class User {
     @Column(name="created_at")
     private LocalDateTime createdAt;
 
-
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_followers",
-            joinColumns = @JoinColumn(name = "follower_id"),
-            inverseJoinColumns = @JoinColumn(name = "followed_id")
-    )
-    private Set<User> following = new HashSet<>();
-
-    @ManyToMany(mappedBy = "following")
-    private Set<User> followers = new HashSet<>();
 
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -119,44 +107,27 @@ public class User {
         this.email = email;
     }
 
-    public Set<User> getFollowing() {
-        return following;
-    }
-
-    public void setArticles(Set<Article> articles) {
-        this.articles = articles;
-    }
-
-    public void setFollowers(Set<User> followers) {
-        this.followers = followers;
-    }
-
-    public void setFollowing(Set<User> following) {
-        this.following = following;
-    }
 
     public Set<Article> getArticles() {
         return articles;
     }
 
-    public Set<User> getFollowers() {
-        return followers;
-    }
+
 
     public void removeArticle(Article article) {
         articles.remove(article);
         article.setAuthor(null);
     }
-
-    public void followUser(User user) {
-        this.following.add(user);
-        user.getFollowers().add(this);
-    }
-
-    public void unfollowUser(User user) {
-        this.following.remove(user);
-        user.getFollowers().remove(this);
-    }
+//
+//    public void followUser(User user) {
+//        this.following.add(user);
+//        user.getFollowers().add(this);
+//    }
+//
+//    public void unfollowUser(User user) {
+//        this.following.remove(user);
+//        user.getFollowers().remove(this);
+//    }
 
     @Override
     public String toString() {
