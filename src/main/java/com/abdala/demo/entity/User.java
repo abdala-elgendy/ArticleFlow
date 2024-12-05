@@ -13,7 +13,6 @@ import java.util.Set;
 @Entity
 @Table(name="user")
 @Data
-
 public class User {
 
 
@@ -23,7 +22,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
 
-    private int id;
+    private Long id;
 
     @Column(name="bio")
     private String bio;
@@ -58,7 +57,7 @@ public class User {
     }
 
     public User( String Name, String email) {
-        this.id = id;
+      //  this.id = id;
         this.Name = Name;
 
         this.email = email;
@@ -66,11 +65,11 @@ public class User {
 
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

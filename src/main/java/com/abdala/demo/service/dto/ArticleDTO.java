@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class ArticleDTO {
-    private int id;
+    private Long id;
     private String title;
     private String description;
     private String content;

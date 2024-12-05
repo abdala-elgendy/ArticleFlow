@@ -22,11 +22,11 @@ public interface UserService {
 
     UserDTO createUser(CreateUserDTO teacherRequest);
 
-    void deleteUser(Integer userId);
+    void deleteUser(Long userId);
 
-    UserDTO  updateUser(Integer id, UpdateUserDTO user);
+    UserDTO  updateUser(Long id, UpdateUserDTO user);
 
-    UserDTO getUserById(Integer userId);
+    UserDTO getUserById(Long userId);
 
   //  List<ArticleDTO> getUserArticles(Integer userId);
 

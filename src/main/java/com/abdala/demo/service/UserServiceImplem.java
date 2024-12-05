@@ -8,6 +8,7 @@ import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.repository.UserRepo;
 import com.abdala.demo.service.dto.ArticleDTO;
 import com.abdala.demo.service.dto.CreateUserDTO;
+
 import com.abdala.demo.service.dto.UpdateUserDTO;
 import com.abdala.demo.service.dto.UserDTO;
 import com.abdala.demo.service.mapper.ArticleMapper;
@@ -63,7 +64,7 @@ public class UserServiceImplem implements UserService{
 
 
     @Override
-    public void deleteUser(Integer userId) {
+    public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
     }
 
@@ -71,7 +72,7 @@ public class UserServiceImplem implements UserService{
 
 
     @Override
-    public UserDTO  updateUser(Integer id, UpdateUserDTO updateUserDTO) {
+    public UserDTO  updateUser(Long id, UpdateUserDTO updateUserDTO) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -86,7 +87,7 @@ public class UserServiceImplem implements UserService{
     }
 
     @Override
-    public UserDTO getUserById(Integer userId) {
+    public UserDTO getUserById(Long userId) {
         return null;
     }
 
