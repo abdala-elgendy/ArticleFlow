@@ -5,18 +5,14 @@ package com.abdala.demo.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
-@Table(name="User")
+@Table(name="user")
 @Data
-
 public class User {
 
 
@@ -46,18 +42,6 @@ public class User {
 
 
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_followers",
-            joinColumns = @JoinColumn(name = "follower_id"),
-            inverseJoinColumns = @JoinColumn(name = "followed_id")
-    )
-    private Set<User> following = new HashSet<>();
-
-    @ManyToMany(mappedBy = "following")
-    private Set<User> followers = new HashSet<>();
-
-
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Article> articles = new HashSet<>();
     public LocalDateTime getCreatedAt() {
@@ -73,7 +57,7 @@ public class User {
     }
 
     public User( String Name, String email) {
-        this.id = id;
+      //  this.id = id;
         this.Name = Name;
 
         this.email = email;
@@ -122,44 +106,27 @@ public class User {
         this.email = email;
     }
 
-    public Set<User> getFollowing() {
-        return following;
-    }
-
-    public void setArticles(Set<Article> articles) {
-        this.articles = articles;
-    }
-
-    public void setFollowers(Set<User> followers) {
-        this.followers = followers;
-    }
-
-    public void setFollowing(Set<User> following) {
-        this.following = following;
-    }
 
     public Set<Article> getArticles() {
         return articles;
     }
 
-    public Set<User> getFollowers() {
-        return followers;
-    }
+
 
     public void removeArticle(Article article) {
         articles.remove(article);
         article.setAuthor(null);
     }
-
-    public void followUser(User user) {
-        this.following.add(user);
-        user.getFollowers().add(this);
-    }
-
-    public void unfollowUser(User user) {
-        this.following.remove(user);
-        user.getFollowers().remove(this);
-    }
+//
+//    public void followUser(User user) {
+//        this.following.add(user);
+//        user.getFollowers().add(this);
+//    }
+//
+//    public void unfollowUser(User user) {
+//        this.following.remove(user);
+//        user.getFollowers().remove(this);
+//    }
 
     @Override
     public String toString() {

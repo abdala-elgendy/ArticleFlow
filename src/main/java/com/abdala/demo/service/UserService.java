@@ -3,21 +3,22 @@ package com.abdala.demo.service;
 
 
 import com.abdala.demo.entity.Article;
-import com.abdala.demo.entity.ArticleFavorite;
+//import com.abdala.demo.entity.ArticleFavorite;
 import com.abdala.demo.entity.User;
-import com.abdala.demo.entity.UserFollow;
+//import com.abdala.demo.entity.UserFollow;
 import com.abdala.demo.service.dto.ArticleDTO;
 import com.abdala.demo.service.dto.CreateUserDTO;
 import com.abdala.demo.service.dto.UpdateUserDTO;
 import com.abdala.demo.service.dto.UserDTO;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-
+@Service
 public interface UserService {
 
-    void followUser(Long userId, Long followUserId);
-    void unfollowUser(Long userId, Long unfollowUserId);
+    //void followUser(Integer userId, Integer followUserId);
+   // void unfollowUser(Integer userId, Integer unfollowUserId);
 
     UserDTO createUser(CreateUserDTO teacherRequest);
 
@@ -29,9 +30,11 @@ public interface UserService {
 
     List<ArticleDTO> getUserArticles(Long userId);
 
-    List<ArticleDTO> getUserArticleFavorites(Long userId);
+    //  List<ArticleDTO> getUserArticles(Integer userId);
 
-    List<UserDTO> getUserFollow(Long userId);
+   // List<ArticleDTO> getUserArticleFavorites(Integer userId);
+
+    //List<UserDTO> getUserFollow(Integer userId);
 
 
 

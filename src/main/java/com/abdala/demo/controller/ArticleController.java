@@ -21,10 +21,10 @@ public class ArticleController {
     private ArticleMapper articleMapper;
 
 
-    @GetMapping("/tag/{tagName}")
-    public List<ArticleDTO> getArticlesByTagName(@PathVariable String tagName) {
-        return articleService.getArticlesByTagName(tagName);
-    }
+//    @GetMapping("/tag/{tagName}")
+//    public List<ArticleDTO> getArticlesByTagName(@PathVariable String tagName) {
+//        return articleService.getArticlesByTagName(tagName);
+//    }
 
 
     @PostMapping
@@ -34,14 +34,32 @@ public class ArticleController {
 
 
     @GetMapping("/{id}")
-    public ArticleDTO getArticleById(@PathVariable Long id) {
-        return articleService.getArticleById(id);
+    public ArticleDTO getArticleById(@PathVariable int id) {
+
+        try {
+         articleService.getArticleById(id);
+        }catch (Exception e){
+           return new ArticleDTO();
+        }
+        ArticleDTO article=   articleService.getArticleById(id);
+        return article ;
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ArticleDTO> updateArticle(@PathVariable Long id, @RequestBody CreateArticleDTO updateArticleDTO) {
+    public ResponseEntity<ArticleDTO> updateArticle(@PathVariable int id, @RequestBody CreateArticleDTO updateArticleDTO) {
         ArticleDTO updatedArticle = articleService.updateArticle(id, updateArticleDTO);
         return ResponseEntity.ok(updatedArticle);
+    }
+    @DeleteMapping("/{id}")
+    public String updateArticle(@PathVariable int id) {
+       try {
+           articleService.getArticleById(id);
+       }catch (Exception e){
+           return "article dosn't exist";
+       }
+        articleService.deleteArticle(id);
+        return "article deleted";
+
     }
 }
 

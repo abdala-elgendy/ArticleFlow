@@ -11,14 +11,14 @@ import com.abdala.demo.service.dto.CreateArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.abdala.demo.service.mapper.ArticleMapper;
+
 @Service
 public class ArticleServiceImplem implements ArticleService {
 
     @Autowired
     private ArticleRepo articleRepository;
 
-    @Autowired
-    private UserRepo userRepository;
+
 
     @Autowired
     private ArticleMapper articleMapper;
@@ -31,7 +31,7 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public ArticleDTO updateArticle(Long id, CreateArticleDTO updateArticleDTO) {
+    public ArticleDTO updateArticle(int id, CreateArticleDTO updateArticleDTO) {
         return articleRepository.findById(id).map(existingArticle -> {
             existingArticle.setTitle(updateArticleDTO.getTitle());
             existingArticle.setDescription(updateArticleDTO.getDescription());
@@ -42,12 +42,12 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public void deleteArticle(Long id) {
+    public void deleteArticle(int id) {
         articleRepository.deleteById(id);
     }
 
     @Override
-    public ArticleDTO getArticleById(Long id) {
+    public ArticleDTO getArticleById(int id) {
         return articleRepository.findById(id)
                 .map(articleMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("Article not found"));
@@ -62,7 +62,7 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public List<ArticleDTO> getArticlesByAuthor(Long id) {
+    public List<ArticleDTO> getArticlesByAuthor(int id) {
        // return articleRepository.findByAuthorId(authorId);
 
         return articleRepository.findById(id)
@@ -70,13 +70,13 @@ public class ArticleServiceImplem implements ArticleService {
                 .stream().collect(Collectors.toList());
     }
 
-    @Override
-    public List<ArticleDTO> getArticlesByTagName(String tagName) {
-        List<Article> articles = articleRepository.findArticlesByTagName(tagName);
-        return articles.stream()
-                .map(articleMapper::toDTO)
-                .collect(Collectors.toList());
-    }
+//    @Override
+//    public List<ArticleDTO> getArticlesByTagName(String tagName) {
+//        List<Article> articles = articleRepository.findArticlesByTagName(tagName);
+//        return articles.stream()
+//                .map(articleMapper::toDTO)
+//                .collect(Collectors.toList());
+//    }
 }
 
 
