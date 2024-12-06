@@ -15,34 +15,52 @@ import java.util.List;
 @RequestMapping("/api/articles")
 public class ArticleController {
 
-//    @Autowired
-//    private ArticleService articleService;
-//    @Autowired
-//    private ArticleMapper articleMapper;
-//
-//
-////    @GetMapping("/tag/{tagName}")
-////    public List<ArticleDTO> getArticlesByTagName(@PathVariable String tagName) {
-////        return articleService.getArticlesByTagName(tagName);
-////    }
-//
-//
-//    @PostMapping
-//    public ArticleDTO createArticle(@RequestBody CreateArticleDTO createArticleDTO) {
-//        return articleService.createArticle(createArticleDTO);
+    @Autowired
+    private ArticleService articleService;
+    @Autowired
+    private ArticleMapper articleMapper;
+
+
+//    @GetMapping("/tag/{tagName}")
+//    public List<ArticleDTO> getArticlesByTagName(@PathVariable String tagName) {
+//        return articleService.getArticlesByTagName(tagName);
 //    }
-//
-//
-//    @GetMapping("/{id}")
-//    public ArticleDTO getArticleById(@PathVariable int id) {
-//        return articleService.getArticleById(id);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<ArticleDTO> updateArticle(@PathVariable int id, @RequestBody CreateArticleDTO updateArticleDTO) {
-//        ArticleDTO updatedArticle = articleService.updateArticle(id, updateArticleDTO);
-//        return ResponseEntity.ok(updatedArticle);
-//    }
+
+
+    @PostMapping
+    public ArticleDTO createArticle(@RequestBody CreateArticleDTO createArticleDTO) {
+        return articleService.createArticle(createArticleDTO);
+    }
+
+
+    @GetMapping("/{id}")
+    public ArticleDTO getArticleById(@PathVariable int id) {
+
+        try {
+         articleService.getArticleById(id);
+        }catch (Exception e){
+           return new ArticleDTO();
+        }
+        ArticleDTO article=   articleService.getArticleById(id);
+        return article ;
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ArticleDTO> updateArticle(@PathVariable int id, @RequestBody CreateArticleDTO updateArticleDTO) {
+        ArticleDTO updatedArticle = articleService.updateArticle(id, updateArticleDTO);
+        return ResponseEntity.ok(updatedArticle);
+    }
+    @DeleteMapping("/{id}")
+    public String updateArticle(@PathVariable int id) {
+       try {
+           articleService.getArticleById(id);
+       }catch (Exception e){
+           return "article dosn't exist";
+       }
+        articleService.deleteArticle(id);
+        return "article deleted";
+
+    }
 }
 
 // Delete an article by ID

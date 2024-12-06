@@ -28,7 +28,9 @@ public interface UserService {
 
     UserDTO getUserById(Long userId);
 
-  //  List<ArticleDTO> getUserArticles(Integer userId);
+    List<ArticleDTO> getUserArticles(Long userId);
+
+    //  List<ArticleDTO> getUserArticles(Integer userId);
 
    // List<ArticleDTO> getUserArticleFavorites(Integer userId);
 

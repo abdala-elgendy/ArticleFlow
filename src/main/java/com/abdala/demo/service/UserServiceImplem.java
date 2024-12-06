@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -91,14 +90,14 @@ public class UserServiceImplem implements UserService{
         return null;
     }
 
-//    @Override
-//    public List<ArticleDTO> getUserArticles(Integer userId) {
-//        List<Article> articles = articleRepository.findByAuthorId(userId);
-//        return articles.stream()
-//                .map(articleMapper::toDTO)
-//                .collect(Collectors.toList());
-//    }
-//
+    @Override
+    public List<ArticleDTO> getUserArticles(Long userId) {
+        List<Article> articles = articleRepository.findByAuthorId(userId);
+        return articles.stream()
+                .map(articleMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
 //    @Override
 //    public List<ArticleDTO> getUserArticleFavorites(Integer userId) {
 //        List<Article> favoriteArticles = articleRepository.findFavoriteArticlesByUserId(userId);
@@ -106,7 +105,7 @@ public class UserServiceImplem implements UserService{
 //                .map(articleMapper::toDTO)
 //                .collect(Collectors.toList());
 //    }
-
+//
 //    @Override
 //    public List<UserDTO> getUserFollow(Integer userId) {
 //
@@ -115,6 +114,6 @@ public class UserServiceImplem implements UserService{
 //                .map(userMapper::toDTO)
 //                .collect(Collectors.toList());
 //    }
-
+//
 
 }

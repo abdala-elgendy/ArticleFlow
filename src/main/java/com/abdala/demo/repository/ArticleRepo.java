@@ -13,13 +13,13 @@ import java.util.List;
 
 public interface ArticleRepo extends JpaRepository<Article, Integer> {
 
-//    @Query("SELECT a FROM Article a  WHERE a.tagName = :tagName")
-//    List<Article> findArticlesByTagName(@Param("tagName") String tagName);
-//
-//  @Query("select a from Article a join User x where x.id=:authorId")
-//    List<Article> findByAuthorId(Long authorId);
-//
-//    List<Article> findFavoriteArticlesByUserId(Long userId);
+    @Query("SELECT a FROM Article a  WHERE a.tagName = :tagName")
+    List<Article> findArticlesByTagName(@Param("tagName") String tagName);
+
+  @Query("select a from Article a join User x where x.id=:authorId")
+    List<Article> findByAuthorId(Long authorId);
+
+   // List<Article> findFavoriteArticlesByUserId(Long userId);
 
 
 }
