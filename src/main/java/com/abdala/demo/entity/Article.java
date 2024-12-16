@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "article")
@@ -38,6 +39,9 @@ public class Article {
 
    @Column (name="tag_name")
    private String tagName;
+
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = ArticleComment.class, cascade = CascadeType.ALL)
+   Set<ArticleComment> articleComments;
 
     public String getTagName() {
         return tagName;

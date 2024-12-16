@@ -1,8 +1,11 @@
 package com.abdala.demo.service;
 
 import com.abdala.demo.entity.Article;
+import com.abdala.demo.entity.ArticleComment;
+import com.abdala.demo.entity.User;
 import com.abdala.demo.service.dto.ArticleDTO;
 import com.abdala.demo.service.dto.CreateArticleDTO;
+import com.abdala.demo.service.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +14,14 @@ import java.util.List;
 public interface ArticleService {
 
     ArticleDTO createArticle(CreateArticleDTO article);
-    ArticleDTO updateArticle(int id, CreateArticleDTO article);
-    void deleteArticle(int id);
-    ArticleDTO getArticleById(int id);
+    ArticleDTO updateArticle(Long id, CreateArticleDTO article);
+    void deleteArticle(Long id);
+    ArticleDTO getArticleById(Long id);
     List<ArticleDTO> getAllArticles();
-    List<ArticleDTO> getArticlesByAuthor(int authorId);
+    List<ArticleDTO> getArticlesByAuthor(Long authorId);
+    List<ArticleComment> getArticleComments(Long articleId);
+
+    User getAuthorOfArticle(Long articleId);
 
 //    List<ArticleDTO> getArticlesByTagName(String tagName);
 }
