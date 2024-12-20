@@ -27,7 +27,7 @@ public class User {
     @Column(name="bio")
     private String bio;
 
-    @Column(name="password")
+    @Column(name="password",nullable = false)
     @JsonIgnore
     private String password;
 
