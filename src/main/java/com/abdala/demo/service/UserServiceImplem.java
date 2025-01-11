@@ -87,12 +87,19 @@ public class UserServiceImplem implements UserService{
 
     @Override
     public UserDTO getUserById(Long userId) {
-        return null;
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+        return userMapper.toDto(user);
     }
 
     @Override
     public List<ArticleDTO> getUserArticles(Long userId) {
-        return List.of();
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+        List<Article> articles = (List<Article>) articleRepository.getAuthorOfArticle(userId);
+        return articles.stream()
+                .map(articleMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
 

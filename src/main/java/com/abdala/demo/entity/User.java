@@ -65,6 +65,16 @@ public class User {
     @JsonIgnore
     private Set<User> followers = new HashSet<>();
 
+    public User(String name, String email) {
+        this.Name=name;
+        this.email=email;
+
+    }
+
+    public User() {
+
+    }
+
     // Other methods (getters, setters, etc.)
 
     public void followUser(User userToFollow) {
