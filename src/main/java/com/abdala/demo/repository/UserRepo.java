@@ -11,17 +11,16 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface UserRepo extends JpaRepository<User,Long> {
 
+    // Custom query to get followers of a user
+    @Query("SELECT u FROM User u JOIN u.followers f WHERE f.id = :userId")
+    List<User> findFollowersByUserId(@Param("userId") Long userId);
 
-//    @Query("select u from User u where u.id = :Id")
-//    Optional<User> findById(@Param("id")int id);
-//
-//   // List<User> findFollowedUsersByUserId(Integer userId);
-//   @Query("SELECT U FROM User U where U.email = :email")
-//    Optional<User> findByEmail(@Param("email")String email);
-
-   // boolean existsByEmail(String email);
+    // Custom query to get users that a user is following
+    @Query("SELECT u FROM User u JOIN u.following f WHERE f.id = :userId")
+    List<User> findFollowingByUserId(@Param("userId") Long userId);
 }
 

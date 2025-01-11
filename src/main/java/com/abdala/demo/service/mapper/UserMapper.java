@@ -5,10 +5,13 @@ import com.abdala.demo.service.dto.CreateUserDTO;
 import com.abdala.demo.service.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Component
 public class UserMapper {
 
-    public UserDTO toDTO(User user) {
+    public static UserDTO toDto(User user) {
         UserDTO dto = new UserDTO();
         dto.setId(user.getId());
         dto.setName(user.getName());
@@ -16,6 +19,15 @@ public class UserMapper {
         dto.setBio(user.getBio());
 
         dto.setCreatedAt(user.getCreatedAt());
+        Set<Long> followerIds = user.getFollowers().stream()
+                .map(User::getId)
+                .collect(Collectors.toSet());
+        UserDTO.setFollowerIds(followerIds);
+
+        Set<Long> followingIds = user.getFollowing().stream()
+                .map(User::getId)
+                .collect(Collectors.toSet());
+        UserDTO.setFollowingIds(followingIds);
         return dto;
     }
 
@@ -28,5 +40,8 @@ public class UserMapper {
 
         return user;
     }
+
+
+
 }
 

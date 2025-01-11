@@ -19,7 +19,7 @@ public interface ArticleRepo extends JpaRepository<Article, Long> {
 //    List<Article> findArticlesByTagName(@Param("tagName") String tagName);
 
     @Query("select a from Article a join User x on x.id=:authorId")
-    List<Article> findByAuthorId(Long authorId);
+    List<ArticleDTO> findByAuthorId(Long authorId);
 
 
     @Query("select x from Article a join User x on x.id=:authorId")

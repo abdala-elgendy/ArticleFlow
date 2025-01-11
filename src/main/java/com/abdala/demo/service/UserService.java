@@ -14,11 +14,14 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Set;
+
 @Service
 public interface UserService {
 
-    //void followUser(Integer userId, Integer followUserId);
-   // void unfollowUser(Integer userId, Integer unfollowUserId);
+    public void followUser(Long followerId, Long followedId);
+    public void unFollowUser(Long followerId, Long followedId);
+    List<UserDTO> getFollowers(Long followerId);
 
     UserDTO createUser(CreateUserDTO teacherRequest);
 
@@ -29,6 +32,9 @@ public interface UserService {
     UserDTO getUserById(Long userId);
 
     List<ArticleDTO> getUserArticles(Long userId);
+
+
+
 
     //  List<ArticleDTO> getUserArticles(Integer userId);
 

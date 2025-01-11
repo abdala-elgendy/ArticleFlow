@@ -20,19 +20,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
-//    @Autowired
-//    private UserRepo userRepository;
-//
-//    @Autowired
-//    private ArticleRepo articleRepository;
-//
-//    @Autowired
-//    private ArticleMapper articleMapper;
 
     @Autowired
     private UserService userService;
@@ -70,7 +63,11 @@ public class UserController {
         List<ArticleDTO> articles = userService.getUserArticles(userId);
         return new ResponseEntity<>(articles, HttpStatus.OK);
    }
-
+    @GetMapping("/{userId}/followers")
+    public ResponseEntity<List<UserDTO>> getFollowers(@PathVariable Long followerId) {
+        List<UserDTO> followers = userService.getFollowers(followerId);
+        return ResponseEntity.ok(followers);
+    }
 
 }
 
