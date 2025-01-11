@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+ import java.util.Random;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
