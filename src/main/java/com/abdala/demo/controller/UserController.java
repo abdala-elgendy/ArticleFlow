@@ -40,7 +40,7 @@ public class UserController {
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         UserDTO userDTO = userService.getUserById(id);
        // if(userDTO.getId()!=1)
-            return new ResponseEntity<>(userDTO, HttpStatus.OK);
+            return ResponseEntity.ok(userDTO);
        // return ResponseEntity.ok(userDTO);
     }
 

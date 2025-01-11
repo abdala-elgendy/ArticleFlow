@@ -64,12 +64,13 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public List<ArticleDTO> getArticlesByAuthor(Long id) {
+    public List<ArticleDTO> getArticlesofAuthor(Long id) {
         // return articleRepository.findByAuthorId(authorId);
 
-        return articleRepository.findById(id)
+        return articleRepository.findByAuthorId(id)
+                .stream()
                 .map(articleMapper::toDTO)
-                .stream().collect(Collectors.toList());
+              .collect(Collectors.toList());
     }
 
     @Override
@@ -84,13 +85,25 @@ public class ArticleServiceImplem implements ArticleService {
         return articleRepository.getAuthorOfArticle(articleId);
     }
 
-//    @Override
-//    public List<ArticleDTO> getArticlesByTagName(String tagName) {
-//        List<Article> articles = articleRepository.findArticlesByTagName(tagName);
-//        return articles.stream()
-//                .map(articleMapper::toDTO)
-//                .collect(Collectors.toList());
-//    }
+    @Override
+    public List<ArticleDTO> getArticlesByTagName(String tagName) {
+        return articleRepository.findArticlesByTagName(tagName)
+                .stream()
+                .map(articleMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ArticleComment getComment( Long commentId) {
+        return articleRepository.findCommentsOfArticle(commentId)
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Comment not found"));
+
+
+    }
+
+
 }
 
 

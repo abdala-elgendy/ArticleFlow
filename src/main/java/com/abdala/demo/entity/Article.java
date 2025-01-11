@@ -39,9 +39,13 @@ public class Article {
 
    @Column (name="tag_name")
    private String tagName;
-
+@Column(name="slug")
+    private String slug;
     @OneToMany(fetch = FetchType.LAZY, targetEntity = ArticleComment.class, cascade = CascadeType.ALL)
    Set<ArticleComment> articleComments;
+
+    public Article(String name, String s1, String content, String description, User user) {
+    }
 
     public String getTagName() {
         return tagName;

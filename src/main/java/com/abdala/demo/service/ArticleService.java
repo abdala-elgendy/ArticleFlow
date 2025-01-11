@@ -18,10 +18,14 @@ public interface ArticleService {
     void deleteArticle(Long id);
     ArticleDTO getArticleById(Long id);
     List<ArticleDTO> getAllArticles();
-    List<ArticleDTO> getArticlesByAuthor(Long authorId);
+    List<ArticleDTO> getArticlesofAuthor(Long authorId);
     List<ArticleComment> getArticleComments(Long articleId);
 
     User getAuthorOfArticle(Long articleId);
+
+    List<ArticleDTO> getArticlesByTagName(String tagName);
+
+    ArticleComment getComment( Long commentId);
 
 //    List<ArticleDTO> getArticlesByTagName(String tagName);
 }

@@ -29,4 +29,6 @@ public class ArticleMapper {
 
         return article;
     }
+
+
 }
