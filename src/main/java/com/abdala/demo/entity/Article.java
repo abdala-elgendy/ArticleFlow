@@ -3,19 +3,24 @@ package com.abdala.demo.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "article")
+@Getter
+@Setter
 
 
 public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
 
 
@@ -34,6 +39,9 @@ public class Article {
 
    @Column (name="tag_name")
    private String tagName;
+
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = ArticleComment.class, cascade = CascadeType.ALL)
+   Set<ArticleComment> articleComments;
 
     public String getTagName() {
         return tagName;
@@ -54,47 +62,6 @@ public class Article {
     }
 
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 
 
     public User getAuthor() {

@@ -1,20 +1,19 @@
 package com.abdala.demo.service.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
+@Setter
+@Getter
 public class UserDTO {
 
-  private Integer id;
+  private Long id;
     private   String bio ;
     private LocalDateTime createdAt;
     private   String password ;
@@ -22,57 +21,19 @@ public class UserDTO {
 
     private String Name ;
 
-
+ public UserDTO(){
+   super();
+ };
     private String email ;
-
-    public String getBio() {
-        return bio;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+  private static Set<Long> followerIds;
+  private static Set<Long> followingIds;
 
 
+  public static void setFollowerIds(Set<Long> followerIds) {
+   UserDTO.followerIds = followerIds;
+  }
 
-
-    public void setId(Integer id){
-        this.id=id;
-    }
+  public static void setFollowingIds(Set<Long> followingIds) {
+    UserDTO.followingIds = followingIds;
+  }
 }

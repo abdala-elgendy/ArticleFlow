@@ -4,21 +4,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.abdala.demo.entity.Article;
+import com.abdala.demo.entity.ArticleComment;
+import com.abdala.demo.entity.User;
 import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.repository.UserRepo;
 import com.abdala.demo.service.dto.ArticleDTO;
 import com.abdala.demo.service.dto.CreateArticleDTO;
+import com.abdala.demo.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.abdala.demo.service.mapper.ArticleMapper;
+
 @Service
 public class ArticleServiceImplem implements ArticleService {
 
     @Autowired
     private ArticleRepo articleRepository;
 
-    @Autowired
-    private UserRepo userRepository;
 
     @Autowired
     private ArticleMapper articleMapper;
@@ -31,7 +33,7 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public ArticleDTO updateArticle(Integer id, CreateArticleDTO updateArticleDTO) {
+    public ArticleDTO updateArticle(Long id, CreateArticleDTO updateArticleDTO) {
         return articleRepository.findById(id).map(existingArticle -> {
             existingArticle.setTitle(updateArticleDTO.getTitle());
             existingArticle.setDescription(updateArticleDTO.getDescription());
@@ -42,12 +44,12 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public void deleteArticle(Integer id) {
+    public void deleteArticle(Long id) {
         articleRepository.deleteById(id);
     }
 
     @Override
-    public ArticleDTO getArticleById(Integer id) {
+    public ArticleDTO getArticleById(Long id) {
         return articleRepository.findById(id)
                 .map(articleMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("Article not found"));
@@ -62,12 +64,24 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public List<ArticleDTO> getArticlesByAuthor(Integer id) {
-       // return articleRepository.findByAuthorId(authorId);
+    public List<ArticleDTO> getArticlesByAuthor(Long id) {
+        // return articleRepository.findByAuthorId(authorId);
 
         return articleRepository.findById(id)
                 .map(articleMapper::toDTO)
                 .stream().collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ArticleComment> getArticleComments(Long articleId) {
+        List<ArticleComment> articleComments = articleRepository.findCommentsOfArticle
+                (articleId);
+        return articleComments;
+    }
+
+    @Override
+    public User getAuthorOfArticle(Long articleId) {
+        return articleRepository.getAuthorOfArticle(articleId);
     }
 
 //    @Override
