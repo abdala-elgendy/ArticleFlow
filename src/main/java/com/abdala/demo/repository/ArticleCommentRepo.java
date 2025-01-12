@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface ArticleCommentRepo extends JpaRepository<ArticleComment, Long> {
-  @Query("select ac from ArticleComment ac where ac.article.id = :articleId")
+   @Query("select ac from ArticleComment ac where ac.article.id = :articleId")
     List<ArticleComment> findCommentsByArticleId(Long articleId);
 
     void deleteAll();
