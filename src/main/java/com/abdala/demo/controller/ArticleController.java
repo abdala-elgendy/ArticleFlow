@@ -66,13 +66,15 @@ public class ArticleController {
         return "article deleted";
 
     }
+
     @GetMapping("/{id}/comments")
     public ResponseEntity<List<ArticleComment>> getArticleComments(@PathVariable Long id) {
 List<ArticleComment> result= articleService.getArticleComments(id);
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/{id}/author")
+    //ok
+    @GetMapping("/slug/{slug}")
     public ArticleDTO getByArticleSlug(@PathVariable String slug) {
         Article article = articleRepo.findBySlug(slug)
                 .orElseThrow(() -> new RuntimeException("Article not found with slug: " + slug));
