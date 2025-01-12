@@ -19,7 +19,7 @@ public interface ArticleRepo extends JpaRepository<Article, Long> {
     @Query("SELECT a FROM Article a  WHERE a.tagName = :tagName")
     List<Article> findArticlesByTagName(@Param("tagName") String tagName);
 
-    @Query("select a from Article a join User x on x.id=:authorId")
+    @Query("select a from Article a where a.author.id=:authorId")
     List<Article> findByAuthorId(Long authorId);
 
 

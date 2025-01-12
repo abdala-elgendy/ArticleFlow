@@ -6,10 +6,7 @@ import com.abdala.demo.entity.Article;
 //import com.abdala.demo.entity.ArticleFavorite;
 import com.abdala.demo.entity.User;
 //import com.abdala.demo.entity.UserFollow;
-import com.abdala.demo.service.dto.ArticleDTO;
-import com.abdala.demo.service.dto.CreateUserDTO;
-import com.abdala.demo.service.dto.UpdateUserDTO;
-import com.abdala.demo.service.dto.UserDTO;
+import com.abdala.demo.service.dto.*;
 import org.springframework.stereotype.Service;
 
 
@@ -33,6 +30,7 @@ public interface UserService {
 
     List<ArticleDTO> getUserArticles(Long userId);
 
+    UserProfileDTO getUserProfile(Long userId);
 
 
 

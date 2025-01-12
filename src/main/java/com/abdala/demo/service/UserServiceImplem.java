@@ -6,11 +6,8 @@ import com.abdala.demo.entity.User;
 //import com.abdala.demo.entity.UserFollow;
 import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.repository.UserRepo;
-import com.abdala.demo.service.dto.ArticleDTO;
-import com.abdala.demo.service.dto.CreateUserDTO;
+import com.abdala.demo.service.dto.*;
 
-import com.abdala.demo.service.dto.UpdateUserDTO;
-import com.abdala.demo.service.dto.UserDTO;
 import com.abdala.demo.service.mapper.ArticleMapper;
 import com.abdala.demo.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +32,8 @@ public class UserServiceImplem implements UserService{
 
     @Autowired
     private ArticleMapper articleMapper;
-
-
+    @Autowired
+    private UserRepo userRepo;
 
 
     @Override
@@ -77,17 +74,19 @@ public class UserServiceImplem implements UserService{
 
     @Override
     public void deleteUser(Long userId) {
-
+     userRepository.deleteById(userId);
     }
 
     @Override
     public UserDTO updateUser(Long id, UpdateUserDTO user) {
         return null;
+
+
     }
 
     @Override
     public UserDTO getUserById(Long userId) {
-        User user = userRepository.findById(userId)
+        User user = userRepository.findUserById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
         return userMapper.toDto(user);
     }
@@ -103,6 +102,29 @@ public class UserServiceImplem implements UserService{
     }
 
 
+    @Override
+    public UserProfileDTO getUserProfile(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        List<Article> articles = articleRepository.findByAuthorId(userId);
+        List<UserDTO> followers = getFollowers(userId);
+        List<UserDTO> following = getFollowing(userId);
+
+        UserProfileDTO userProfile = new UserProfileDTO();
+        userProfile.setUser(userMapper.toDto(user));
+        userProfile.setArticles(articles.stream().map(articleMapper::toDTO).collect(Collectors.toList()));
+        userProfile.setFollowers(followers);
+        userProfile.setFollowing(following);
+
+        return userProfile;
+    }
+
+    private List<UserDTO> getFollowing(Long userId) {
+        List<User> followers = userRepository.findFollowingByUserId(userId);
+
+        return followers.stream()
+                .map(UserMapper::toDto)
+                .collect(Collectors.toList());
+    }
 }
 
 

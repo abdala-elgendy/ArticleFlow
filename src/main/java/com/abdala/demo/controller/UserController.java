@@ -9,10 +9,7 @@ import com.abdala.demo.entity.User;
 import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.repository.UserRepo;
 import com.abdala.demo.service.UserService;
-import com.abdala.demo.service.dto.ArticleDTO;
-import com.abdala.demo.service.dto.CreateUserDTO;
-import com.abdala.demo.service.dto.UpdateUserDTO;
-import com.abdala.demo.service.dto.UserDTO;
+import com.abdala.demo.service.dto.*;
 import com.abdala.demo.service.mapper.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,8 +49,16 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+    public String deleteUser(@PathVariable Long id) {
+        try{
+            userService.deleteUser(id);
+        }
+        catch (Exception e){
+            return "User not found";
+          //  throw new RuntimeException("User not found");
+        }
+        //userService.deleteUser(id);
+        return "User deleted successfully";
     }
 
 
@@ -68,6 +73,10 @@ public class UserController {
         List<UserDTO> followers = userService.getFollowers(followerId);
         return ResponseEntity.ok(followers);
     }
-
+  @GetMapping("{userId}/profile")
+    public ResponseEntity<UserProfileDTO> getUserProfile(@PathVariable Long userId) {
+       UserProfileDTO userProfile = userService.getUserProfile(userId);
+        return ResponseEntity.ok(userProfile);
+  }
 }
 
