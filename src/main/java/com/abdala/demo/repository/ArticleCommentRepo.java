@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ArticleCommentRepo extends JpaRepository<ArticleComment, Long> {
@@ -15,4 +16,6 @@ public interface ArticleCommentRepo extends JpaRepository<ArticleComment, Long> 
     List<ArticleComment> findCommentsByArticleId(Long articleId);
 
     void deleteAll();
+ @Query("select ac from ArticleComment ac where ac.id = :commentId")
+    Optional<ArticleComment> findSpecificComment(Long commentId);
 }

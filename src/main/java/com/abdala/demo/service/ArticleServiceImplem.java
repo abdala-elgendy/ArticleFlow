@@ -101,7 +101,7 @@ public class ArticleServiceImplem implements ArticleService {
 
     @Override
     public ArticleComment getComment( Long commentId) {
-        return articleRepository.findCommentsOfArticle(commentId)
+        return articleCommentRepo.findSpecificComment(commentId)
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Comment not found"));
