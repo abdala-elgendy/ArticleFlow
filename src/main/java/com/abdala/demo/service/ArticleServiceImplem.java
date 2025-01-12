@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleComment;
 import com.abdala.demo.entity.User;
+import com.abdala.demo.repository.ArticleCommentRepo;
 import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.repository.UserRepo;
 import com.abdala.demo.service.dto.ArticleDTO;
@@ -24,6 +25,10 @@ public class ArticleServiceImplem implements ArticleService {
 
     @Autowired
     private ArticleMapper articleMapper;
+
+    @Autowired
+    private ArticleCommentRepo articleCommentRepo;
+
 
     @Override
     public ArticleDTO createArticle(CreateArticleDTO createArticleDTO) {
@@ -75,7 +80,8 @@ public class ArticleServiceImplem implements ArticleService {
 
     @Override
     public List<ArticleComment> getArticleComments(Long articleId) {
-        List<ArticleComment> articleComments = articleRepository.findCommentsOfArticle
+        List<ArticleComment> articleComments = articleCommentRepo
+                .findCommentsByArticleId
                 (articleId);
         return articleComments;
     }
@@ -95,7 +101,7 @@ public class ArticleServiceImplem implements ArticleService {
 
     @Override
     public ArticleComment getComment( Long commentId) {
-        return articleRepository.findCommentsOfArticle(commentId)
+        return articleCommentRepo.findSpecificComment(commentId)
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Comment not found"));

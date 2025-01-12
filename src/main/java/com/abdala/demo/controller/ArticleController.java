@@ -44,7 +44,7 @@ public class ArticleController {
         try {
          articleService.getArticleById(id);
         }catch (Exception e){
-           return new ArticleDTO();
+            throw new RuntimeException("Article not found");
         }
         ArticleDTO article=   articleService.getArticleById(id);
         return article ;
@@ -66,13 +66,15 @@ public class ArticleController {
         return "article deleted";
 
     }
+
     @GetMapping("/{id}/comments")
     public ResponseEntity<List<ArticleComment>> getArticleComments(@PathVariable Long id) {
 List<ArticleComment> result= articleService.getArticleComments(id);
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/{id}/author")
+    //ok
+    @GetMapping("/slug/{slug}")
     public ArticleDTO getByArticleSlug(@PathVariable String slug) {
         Article article = articleRepo.findBySlug(slug)
                 .orElseThrow(() -> new RuntimeException("Article not found with slug: " + slug));
@@ -83,7 +85,7 @@ List<ArticleComment> result= articleService.getArticleComments(id);
     public ResponseEntity<User> authorOfArticle(@PathVariable Long articleId) {
         return ResponseEntity.ok(articleService.getAuthorOfArticle(articleId));
     }
-    @GetMapping ("{id}/comments/{commentId}")
+    @GetMapping ("/comment/{commentId}")
     public ResponseEntity<ArticleComment> getComment( @PathVariable Long commentId){
         return ResponseEntity.ok(articleService.getComment(commentId));
     }
