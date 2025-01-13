@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -95,7 +94,8 @@ public class UserServiceImplem implements UserService{
     public List<ArticleDTO> getUserArticles(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
-        List<Article> articles = (List<Article>) articleRepository.getAuthorOfArticle(userId);
+        List<Article> articles = (List<Article>)
+                articleRepository.findArticleByAuthorId(userId);
         return articles.stream()
                 .map(articleMapper::toDTO)
                 .collect(Collectors.toList());

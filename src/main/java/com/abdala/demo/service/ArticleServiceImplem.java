@@ -28,6 +28,8 @@ public class ArticleServiceImplem implements ArticleService {
 
     @Autowired
     private ArticleCommentRepo articleCommentRepo;
+    @Autowired
+    private UserRepo userRepo;
 
 
     @Override
@@ -72,7 +74,7 @@ public class ArticleServiceImplem implements ArticleService {
     public List<ArticleDTO> getArticlesofAuthor(Long id) {
         // return articleRepository.findByAuthorId(authorId);
 
-        return articleRepository.findByAuthorId(id)
+        return articleRepository.findArticleByAuthorId(id)
                 .stream()
                 .map(articleMapper::toDTO)
               .collect(Collectors.toList());
@@ -88,7 +90,8 @@ public class ArticleServiceImplem implements ArticleService {
 
     @Override
     public User getAuthorOfArticle(Long articleId) {
-        return articleRepository.getAuthorOfArticle(articleId);
+
+        return userRepo.findUserByArticleId(articleId);
     }
 
     @Override

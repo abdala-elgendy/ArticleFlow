@@ -16,7 +16,7 @@ public class ArticleMapper {
         dto.setContent(article.getContent());
         dto.setCreatedAt(article.getCreatedAt());
         dto.setTagName(article.getTagName());
-
+        dto.setSlug(article.getSlug());
         return dto;
     }
 

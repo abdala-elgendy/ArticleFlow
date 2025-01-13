@@ -19,8 +19,8 @@ public interface UserRepo extends JpaRepository<User,Long> {
     // Custom query to get users that a user is following
     @Query("SELECT f FROM User u JOIN u.following f WHERE u.id = :userId")
     List<User> findFollowingByUserId(@Param("userId") Long userId);
-
-    void deleteUserById(Long id);
+@Query("SELECT u FROM User u JOIN u.articles a WHERE a.id = :articleId")
+User findUserByArticleId(Long articleId);
     Optional<User> findUserById(Long id);
 }
 

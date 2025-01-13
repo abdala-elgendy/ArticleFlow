@@ -10,6 +10,7 @@ public class ArticleDTO {
     private String description;
     private String content;
     private String tagName;
+    private String slug;
     private LocalDateTime createdAt;
 
 }
