@@ -5,6 +5,7 @@ import com.abdala.demo.service.dto.CreateUserDTO;
 import com.abdala.demo.service.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,7 @@ public class UserMapper {
         user.setEmail(createUserDTO.getEmail());
         user.setPassword(createUserDTO.getPassword());
         user.setBio(createUserDTO.getBio());
-
+        user.setCreatedAt(LocalDateTime.now());
         return user;
     }
 

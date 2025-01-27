@@ -20,7 +20,7 @@ public interface UserService {
     public void unFollowUser(Long followerId, Long followedId);
     List<UserDTO> getFollowers(Long followerId);
 
-    UserDTO createUser(CreateUserDTO teacherRequest);
+    String createUser(CreateUserDTO teacherRequest);
 
     void deleteUser(Long userId);
 

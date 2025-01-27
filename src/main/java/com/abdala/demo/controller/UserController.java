@@ -21,10 +21,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public  ResponseEntity<UserDTO> createUser(@RequestBody CreateUserDTO createUserDTO) {
-        UserDTO userDTO = userService.createUser(createUserDTO);
-        return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
+    @PostMapping("/post-user")
+    public  String createUser(@RequestBody CreateUserDTO createUserDTO) {
+        try{ userService.createUser(createUserDTO);}
+        catch (Exception e){
+            return "User not created";
+        }
+    return "User created successfully";
     }
 
     @GetMapping("/{id}")

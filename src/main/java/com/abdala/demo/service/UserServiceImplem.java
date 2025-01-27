@@ -67,8 +67,10 @@ public class UserServiceImplem implements UserService{
 
 
     @Override
-    public UserDTO createUser(CreateUserDTO teacherRequest) {
-        return null;
+    public String createUser(CreateUserDTO userRequest){
+        User user = userMapper.toEntity(userRequest);
+       userRepository.save(user);
+        return "User created successfully";
     }
 
     @Override
