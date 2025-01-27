@@ -1,8 +1,8 @@
-package com.abdala.demo.service.mapper;
+package com.abdala.demo.mapper;
 
-import com.abdala.demo.entity.User;
-import com.abdala.demo.service.dto.CreateUserDTO;
-import com.abdala.demo.service.dto.UserDTO;
+import com.abdala.demo.user.User;
+import com.abdala.demo.dto.CreateUserDTO;
+import com.abdala.demo.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

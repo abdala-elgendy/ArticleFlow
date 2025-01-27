@@ -2,17 +2,21 @@ package com.abdala.demo.controller;
 
 import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleComment;
-import com.abdala.demo.entity.User;
+import com.abdala.demo.user.Role;
+import com.abdala.demo.user.User;
 import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.service.ArticleService;
-import com.abdala.demo.service.dto.ArticleDTO;
-import com.abdala.demo.service.dto.CreateArticleDTO;
-import com.abdala.demo.service.mapper.ArticleMapper;
+import com.abdala.demo.dto.ArticleDTO;
+import com.abdala.demo.dto.CreateArticleDTO;
+import com.abdala.demo.mapper.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.security.authorization.AuthorityReactiveAuthorizationManager.hasRole;
 
 @RestController
 @RequestMapping("/api/articles")
@@ -56,6 +60,7 @@ public class ArticleController {
         return ResponseEntity.ok(updatedArticle);
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('admin:delete')")
     public String deleteArticle(@PathVariable Long id) {
        try {
            articleService.getArticleById(id);

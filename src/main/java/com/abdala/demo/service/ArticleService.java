@@ -1,11 +1,9 @@
 package com.abdala.demo.service;
 
-import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleComment;
-import com.abdala.demo.entity.User;
-import com.abdala.demo.service.dto.ArticleDTO;
-import com.abdala.demo.service.dto.CreateArticleDTO;
-import com.abdala.demo.service.mapper.UserMapper;
+import com.abdala.demo.user.User;
+import com.abdala.demo.dto.ArticleDTO;
+import com.abdala.demo.dto.CreateArticleDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

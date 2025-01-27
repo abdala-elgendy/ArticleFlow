@@ -5,16 +5,15 @@ import java.util.stream.Collectors;
 
 import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleComment;
-import com.abdala.demo.entity.User;
+import com.abdala.demo.user.User;
 import com.abdala.demo.repository.ArticleCommentRepo;
 import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.repository.UserRepo;
-import com.abdala.demo.service.dto.ArticleDTO;
-import com.abdala.demo.service.dto.CreateArticleDTO;
-import com.abdala.demo.service.mapper.UserMapper;
+import com.abdala.demo.dto.ArticleDTO;
+import com.abdala.demo.dto.CreateArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.abdala.demo.service.mapper.ArticleMapper;
+import com.abdala.demo.mapper.ArticleMapper;
 
 @Service
 public class ArticleServiceImplem implements ArticleService {

@@ -2,6 +2,7 @@ package com.abdala.demo.entity;
 
 
 
+import com.abdala.demo.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

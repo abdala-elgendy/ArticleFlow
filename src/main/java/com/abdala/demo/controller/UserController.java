@@ -3,15 +3,14 @@ package com.abdala.demo.controller;
 
 
 
+import com.abdala.demo.dto.*;
 import com.abdala.demo.service.UserService;
-import com.abdala.demo.service.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/users")

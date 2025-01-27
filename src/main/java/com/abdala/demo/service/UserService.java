@@ -2,16 +2,13 @@ package com.abdala.demo.service;
 
 
 
-import com.abdala.demo.entity.Article;
 //import com.abdala.demo.entity.ArticleFavorite;
-import com.abdala.demo.entity.User;
 //import com.abdala.demo.entity.UserFollow;
-import com.abdala.demo.service.dto.*;
+import com.abdala.demo.dto.*;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public interface UserService {

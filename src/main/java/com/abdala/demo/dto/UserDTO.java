@@ -1,4 +1,4 @@
-package com.abdala.demo.service.dto;
+package com.abdala.demo.dto;
 
 
 import lombok.*;

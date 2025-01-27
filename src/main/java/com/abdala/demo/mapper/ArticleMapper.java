@@ -1,8 +1,8 @@
-package com.abdala.demo.service.mapper;
+package com.abdala.demo.mapper;
 
 import com.abdala.demo.entity.Article;
-import com.abdala.demo.service.dto.ArticleDTO;
-import com.abdala.demo.service.dto.CreateArticleDTO;
+import com.abdala.demo.dto.ArticleDTO;
+import com.abdala.demo.dto.CreateArticleDTO;
 import org.springframework.stereotype.Component;
 
 @Component

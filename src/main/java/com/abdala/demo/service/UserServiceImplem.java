@@ -1,15 +1,15 @@
 package com.abdala.demo.service;
 
+import com.abdala.demo.dto.*;
 import com.abdala.demo.entity.Article;
 //import com.abdala.demo.entity.ArticleFavorite;
-import com.abdala.demo.entity.User;
+import com.abdala.demo.user.User;
 //import com.abdala.demo.entity.UserFollow;
 import com.abdala.demo.repository.ArticleRepo;
 import com.abdala.demo.repository.UserRepo;
-import com.abdala.demo.service.dto.*;
 
-import com.abdala.demo.service.mapper.ArticleMapper;
-import com.abdala.demo.service.mapper.UserMapper;
+import com.abdala.demo.mapper.ArticleMapper;
+import com.abdala.demo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

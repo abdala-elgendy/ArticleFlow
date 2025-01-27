@@ -2,7 +2,7 @@ package com.abdala.demo.repository;
 
 
 
-import com.abdala.demo.entity.User;
+import com.abdala.demo.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,5 +22,7 @@ public interface UserRepo extends JpaRepository<User,Long> {
 @Query("SELECT u FROM User u JOIN u.articles a WHERE a.id = :articleId")
 User findUserByArticleId(Long articleId);
     Optional<User> findUserById(Long id);
+
+    <T> ScopedValue<T> findByEmail(Object username);
 }
 

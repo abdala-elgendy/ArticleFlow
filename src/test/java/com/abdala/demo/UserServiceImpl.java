@@ -3,7 +3,7 @@
 //import static org.assertj.core.api.Assertions.assertThat;
 //import static org.mockito.Mockito.*;
 //
-//import com.abdala.demo.entity.User;
+//import com.abdala.demo.user.User;
 //import com.abdala.demo.repository.UserRepo;
 //import com.abdala.demo.service.UserServiceImplem;
 //import com.abdala.demo.service.dto.CreateUserDTO;

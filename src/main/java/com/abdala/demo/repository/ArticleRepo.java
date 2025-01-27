@@ -2,10 +2,6 @@ package com.abdala.demo.repository;
 
 import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleComment;
-import com.abdala.demo.entity.User;
-import com.abdala.demo.service.ArticleServiceImplem;
-import com.abdala.demo.service.dto.ArticleDTO;
-import com.abdala.demo.service.dto.CreateArticleDTO;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 

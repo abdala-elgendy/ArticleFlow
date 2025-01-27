@@ -1,6 +1,7 @@
 package com.abdala.demo.entity;
 
 
+import com.abdala.demo.user.User;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
