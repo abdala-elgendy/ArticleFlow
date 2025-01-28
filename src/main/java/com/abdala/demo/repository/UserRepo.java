@@ -23,6 +23,6 @@ public interface UserRepo extends JpaRepository<User,Long> {
 User findUserByArticleId(Long articleId);
     Optional<User> findUserById(Long id);
 
-    <T> ScopedValue<T> findByEmail(Object username);
+    User findByEmail(Object username);
 }
 

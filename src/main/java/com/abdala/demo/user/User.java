@@ -6,6 +6,7 @@ import com.abdala.demo.entity.Article;
 import com.abdala.demo.token.Token;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,6 +44,7 @@ public class User implements UserDetails {
     @Column(name="name")
     private String Name;
 
+    @Email
     @Column(name="email")
     private String email;
 
@@ -131,6 +133,9 @@ private Role role;
     public boolean isEnabled() {
         return true;
     }
+
+
+
 }
 
 
