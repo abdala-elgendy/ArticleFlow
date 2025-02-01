@@ -36,6 +36,7 @@ public class JwtService {
   }
 
   public String generateToken(UserDetails userDetails) {
+  if(userDetails==null){throw(new RuntimeException("User not found"));}
 
     return generateToken(new HashMap<>(), userDetails);
   }
@@ -44,6 +45,7 @@ public class JwtService {
       Map<String, Object> extraClaims,
       UserDetails userDetails
   ) {
+    if(userDetails==null){throw(new RuntimeException("User not found"));}
     return buildToken(extraClaims, userDetails, jwtExpiration);
   }
 
@@ -69,6 +71,7 @@ public class JwtService {
   }
 
   public boolean isTokenValid(String token, UserDetails userDetails) {
+  if(userDetails==null){return false;}
     final String username = extractUsername(token);
     return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
   }

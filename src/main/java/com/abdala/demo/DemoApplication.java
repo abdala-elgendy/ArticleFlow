@@ -8,9 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import java.util.UUID;
 
 import static com.abdala.demo.user.Role.ADMIN;
 
@@ -23,24 +26,42 @@ public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-
 	}
-		@Bean
-		public CommandLineRunner commandLineRunner(
-				AuthenticationService service
+
+	@Bean
+	public CommandLineRunner commandLineRunner(
+			AuthenticationService service
 	) {
-			return args -> {
+		return args -> {
+			String randomEmail;
+			while (true) {
+				randomEmail = generateRandomEmail();
 				var admin = RegisterRequest.builder()
 						.firstname("Admin")
 						.lastname("Admin")
-						.email("admin@mail.com")
+						.email(randomEmail)
 						.password("password")
 						.role(ADMIN)
 						.build();
-				System.out.println("Admin token: " + service.register(admin).getAccessToken());
+				try {
+					System.out.println("Admin token: " + service.register(admin).getRefreshToken());
+					break;
+				} catch (DataIntegrityViolationException e) {
+					System.out.println("Duplicate email found: " + randomEmail + ", retrying...");
+				}
+			}
+		};
+	}
 
+	private String generateRandomEmail() {
+		return "user" + UUID.randomUUID() + "@example.com";
+	}
 
-			};
-
-		}
+	private String generateNewToken(AuthenticationService service, String email, String password) {
+		var request = RegisterRequest.builder()
+				.email(email)
+				.password(password)
+				.build();
+		return service.register(request).getRefreshToken();
+	}
 }
