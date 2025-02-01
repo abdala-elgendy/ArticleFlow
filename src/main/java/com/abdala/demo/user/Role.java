@@ -24,8 +24,16 @@ public enum Role {
                   ADMIN_CREATE
 
           )
-  )
 
+  )
+,NORMALUSER(
+          Set.of(
+                  NORMALUSER_READ,
+                  NORMALUSER_UPDATE,
+                  NORMALUSER_DELETE,
+                  NORMALUSER_CREATE
+          )
+  )
   ;
 
   @Getter
