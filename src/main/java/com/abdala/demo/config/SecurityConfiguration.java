@@ -49,6 +49,7 @@ public class SecurityConfiguration {
                                 .permitAll()
                                 .requestMatchers("api/auth/**").permitAll()
                                 .requestMatchers("api/articles/**").permitAll()
+                                .requestMatchers("api/favorites/**").permitAll()
                                 .requestMatchers("api/users/**").permitAll()
                                 .requestMatchers(GET, "/api/users/{id}").hasAnyAuthority(ADMIN_READ.name())
                                 .requestMatchers(DELETE, "/api/articles/{id}").hasAnyAuthority(ADMIN_UPDATE.name(),ADMIN_DELETE.name())
