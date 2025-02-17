@@ -24,7 +24,7 @@ public interface ArticleService {
 
     List<ArticleDTO> getArticlesByTagName(String tagName);
 
-    ArticleComment getComment( Long commentId);
+    ArticleCommentDTO getComment( Long commentId);
 
 //    List<ArticleDTO> getArticlesByTagName(String tagName);
 }

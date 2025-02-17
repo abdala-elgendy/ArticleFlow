@@ -92,7 +92,8 @@ List<ArticleCommentDTO> result= articleService.getArticleComments(id);
         return ResponseEntity.ok(articleService.getAuthorOfArticle(articleId));
     }
     @GetMapping ("/comment/{commentId}")
-    public ResponseEntity<ArticleComment> getComment( @PathVariable Long commentId){
+    public ResponseEntity<ArticleCommentDTO> getComment( @PathVariable Long commentId){
+
         return ResponseEntity.ok(articleService.getComment(commentId));
     }
 }

@@ -17,5 +17,5 @@ public interface ArticleCommentRepo extends JpaRepository<ArticleComment, Long> 
 
     void deleteAll();
  @Query("select ac from ArticleComment ac where ac.id = :commentId")
-    Optional<ArticleComment> findSpecificComment(Long commentId);
+  ArticleComment findSpecificComment(Long commentId);
 }

@@ -103,12 +103,10 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public ArticleComment getComment( Long commentId) {
-        return articleCommentRepo.findSpecificComment(commentId)
-                .stream()
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Comment not found"));
+    public ArticleCommentDTO getComment( Long commentId) {
+        ArticleComment ac= articleCommentRepo.findSpecificComment(commentId);
 
+        return articleMapper.toDTO(ac);
 
     }
 
