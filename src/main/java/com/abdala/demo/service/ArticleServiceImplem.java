@@ -110,6 +110,15 @@ public class ArticleServiceImplem implements ArticleService {
 
     }
 
+    @Override
+    public List<ArticleDTO> findByContentContainingIgnoreCase(String keyword) {
+        List<Article> articles = articleRepository.findByContentContainingIgnoreCase(keyword);
+
+        return articles.stream()
+                .map(articleMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
 
 }
 

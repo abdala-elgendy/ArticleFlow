@@ -25,6 +25,6 @@ public interface ArticleService {
     List<ArticleDTO> getArticlesByTagName(String tagName);
 
     ArticleCommentDTO getComment( Long commentId);
-
+    List<ArticleDTO> findByContentContainingIgnoreCase(String keyword);
 //    List<ArticleDTO> getArticlesByTagName(String tagName);
 }

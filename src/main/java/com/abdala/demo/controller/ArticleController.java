@@ -47,12 +47,12 @@ public class ArticleController {
     public ArticleDTO getArticleById(@PathVariable Long id) {
 
         try {
-         articleService.getArticleById(id);
-        }catch (Exception e){
+            articleService.getArticleById(id);
+        } catch (Exception e) {
             throw new RuntimeException("Article not found");
         }
-        ArticleDTO article=   articleService.getArticleById(id);
-        return article ;
+        ArticleDTO article = articleService.getArticleById(id);
+        return article;
     }
 
     @PutMapping("/{id}")
@@ -60,14 +60,15 @@ public class ArticleController {
         ArticleDTO updatedArticle = articleService.updateArticle(id, updateArticleDTO);
         return ResponseEntity.ok(updatedArticle);
     }
+
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('admin:delete')")
     public String deleteArticle(@PathVariable Long id) {
-       try {
-           articleService.getArticleById(id);
-       }catch (Exception e){
-           return "article dosn't exist";
-       }
+        try {
+            articleService.getArticleById(id);
+        } catch (Exception e) {
+            return "article dosn't exist";
+        }
         articleService.deleteArticle(id);
         return "article deleted";
 
@@ -75,7 +76,7 @@ public class ArticleController {
 
     @GetMapping("/{id}/comments") // solve bug in this request latter
     public ResponseEntity<List<ArticleCommentDTO>> getArticleComments(@PathVariable Long id) {
-List<ArticleCommentDTO> result= articleService.getArticleComments(id);
+        List<ArticleCommentDTO> result = articleService.getArticleComments(id);
         return ResponseEntity.ok(result);
     }
 
@@ -91,13 +92,20 @@ List<ArticleCommentDTO> result= articleService.getArticleComments(id);
     public ResponseEntity<User> authorOfArticle(@PathVariable Long articleId) {
         return ResponseEntity.ok(articleService.getAuthorOfArticle(articleId));
     }
-    @GetMapping ("/comment/{commentId}")
-    public ResponseEntity<ArticleCommentDTO> getComment( @PathVariable Long commentId){
+
+    @GetMapping("/comment/{commentId}")
+    public ResponseEntity<ArticleCommentDTO> getComment(@PathVariable Long commentId) {
 
         return ResponseEntity.ok(articleService.getComment(commentId));
     }
+
+    @GetMapping("/search/{query}")
+    public ResponseEntity<List<ArticleDTO>> searchArticles(@PathVariable String query) {
+        List<ArticleDTO> articles = articleService.findByContentContainingIgnoreCase(query);
+        if(articles.isEmpty()) {
+            throw new RuntimeException("No articles found with keyword: " + query);
+        }
+        return ResponseEntity.ok(articles);
+    }
+
 }
-
-
-
-

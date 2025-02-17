@@ -1,5 +1,6 @@
 package com.abdala.demo.repository;
 
+import com.abdala.demo.dto.ArticleDTO;
 import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleComment;
 import org.springframework.data.jpa.repository.Query;
@@ -38,4 +39,7 @@ public interface ArticleRepo extends JpaRepository<Article, Long> {
     // List<Article> findFavoriteArticlesByUserId(Long userId);
 
 
+    @Query( "SELECT  ac FROM Article ac WHERE LOWER(ac.content)" +
+            " LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<Article> findByContentContainingIgnoreCase(@Param("keyword") String keyword);
 }
