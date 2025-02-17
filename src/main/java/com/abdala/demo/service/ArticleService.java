@@ -1,5 +1,6 @@
 package com.abdala.demo.service;
 
+import com.abdala.demo.dto.ArticleCommentDTO;
 import com.abdala.demo.entity.ArticleComment;
 import com.abdala.demo.user.User;
 import com.abdala.demo.dto.ArticleDTO;
@@ -17,7 +18,7 @@ public interface ArticleService {
     ArticleDTO getArticleById(Long id);
     List<ArticleDTO> getAllArticles();
     List<ArticleDTO> getArticlesofAuthor(Long authorId);
-    List<ArticleComment> getArticleComments(Long articleId);
+    List<ArticleCommentDTO> getArticleComments(Long articleId);
 
     User getAuthorOfArticle(Long articleId);
 

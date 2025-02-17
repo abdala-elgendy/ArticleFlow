@@ -3,6 +3,7 @@ package com.abdala.demo.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.abdala.demo.dto.ArticleCommentDTO;
 import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleComment;
 import com.abdala.demo.user.User;
@@ -80,11 +81,11 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public List<ArticleComment> getArticleComments(Long articleId) {
-        List<ArticleComment> articleComments = articleCommentRepo
-                .findCommentsByArticleId
-                (articleId);
-        return articleComments;
+    public List<ArticleCommentDTO> getArticleComments(Long articleId) {
+        List<ArticleComment> articleComments = articleCommentRepo.findCommentsByArticleId(articleId);
+        return articleComments.stream()
+                .map(articleMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Override

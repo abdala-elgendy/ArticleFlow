@@ -1,5 +1,6 @@
 package com.abdala.demo.controller;
 
+import com.abdala.demo.dto.ArticleCommentDTO;
 import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleComment;
 import com.abdala.demo.user.Role;
@@ -72,9 +73,9 @@ public class ArticleController {
 
     }
 
-    @GetMapping("/{id}/comments")
-    public ResponseEntity<List<ArticleComment>> getArticleComments(@PathVariable Long id) {
-List<ArticleComment> result= articleService.getArticleComments(id);
+    @GetMapping("/{id}/comments") // solve bug in this request latter
+    public ResponseEntity<List<ArticleCommentDTO>> getArticleComments(@PathVariable Long id) {
+List<ArticleCommentDTO> result= articleService.getArticleComments(id);
         return ResponseEntity.ok(result);
     }
 

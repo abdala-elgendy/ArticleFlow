@@ -1,8 +1,10 @@
 package com.abdala.demo.mapper;
 
+import com.abdala.demo.dto.ArticleCommentDTO;
 import com.abdala.demo.entity.Article;
 import com.abdala.demo.dto.ArticleDTO;
 import com.abdala.demo.dto.CreateArticleDTO;
+import com.abdala.demo.entity.ArticleComment;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -29,6 +31,13 @@ public class ArticleMapper {
 
         return article;
     }
-
+    public ArticleCommentDTO toDTO(ArticleComment articleComment) {
+        ArticleCommentDTO dto = new ArticleCommentDTO();
+        dto.setArticleId(articleComment.getArticle().getId());
+        dto.setContent(articleComment.getContent());
+        dto.setAuthor(articleComment.getAuthor().getUsername());
+        dto.setCreatedAt(articleComment.getCreatedAt());
+        return dto;
+    }
 
 }
