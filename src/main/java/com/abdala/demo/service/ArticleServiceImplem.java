@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.abdala.demo.dto.ArticleCommentDTO;
 import com.abdala.demo.entity.Article;
 import com.abdala.demo.entity.ArticleComment;
+import com.abdala.demo.mapper.CommentMapper;
 import com.abdala.demo.user.User;
 import com.abdala.demo.repository.ArticleCommentRepo;
 import com.abdala.demo.repository.ArticleRepo;
@@ -22,6 +23,8 @@ public class ArticleServiceImplem implements ArticleService {
     @Autowired
     private ArticleRepo articleRepository;
 
+    @Autowired
+    private CommentMapper commentMapper;
 
     @Autowired
     private ArticleMapper articleMapper;
@@ -77,7 +80,7 @@ public class ArticleServiceImplem implements ArticleService {
         return articleRepository.findArticleByAuthorId(id)
                 .stream()
                 .map(articleMapper::toDTO)
-              .collect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -103,8 +106,8 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
-    public ArticleCommentDTO getComment( Long commentId) {
-        ArticleComment ac= articleCommentRepo.findSpecificComment(commentId);
+    public ArticleCommentDTO getComment(Long commentId) {
+        ArticleComment ac = articleCommentRepo.findSpecificComment(commentId);
 
         return articleMapper.toDTO(ac);
 
@@ -119,7 +122,15 @@ public class ArticleServiceImplem implements ArticleService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public ArticleCommentDTO createComment(Long articleId, ArticleCommentDTO articleCommentDTO) {
+        ArticleComment articleComment = commentMapper.toEntity(articleCommentDTO);
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new RuntimeException("Article not found"));
+        articleComment.setArticle(article);
+        ArticleComment savedComment = articleCommentRepo.save(articleComment);
+        return articleMapper.toDTO(savedComment);
+    }
+
 
 }
-
-

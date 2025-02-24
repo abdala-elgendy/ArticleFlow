@@ -37,7 +37,7 @@ public class ArticleController {
     }
 
 
-    @PostMapping
+    @PostMapping("/create")
     public ArticleDTO createArticle(@RequestBody CreateArticleDTO createArticleDTO) {
         return articleService.createArticle(createArticleDTO);
     }
@@ -99,6 +99,11 @@ public class ArticleController {
         return ResponseEntity.ok(articleService.getComment(commentId));
     }
 
+    @PostMapping("/{articleId}/comment")
+     public ResponseEntity<ArticleCommentDTO> createComment(@PathVariable Long articleId, @RequestBody ArticleCommentDTO articleCommentDTO) {
+        ArticleCommentDTO comment = articleService.createComment(articleId, articleCommentDTO);
+        return ResponseEntity.ok(comment);
+    }
     @GetMapping("/search/{query}")
     public ResponseEntity<List<ArticleDTO>> searchArticles(@PathVariable String query) {
         List<ArticleDTO> articles = articleService.findByContentContainingIgnoreCase(query);
