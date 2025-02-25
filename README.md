@@ -63,6 +63,14 @@
    cd ArticleFlow
    ```
 2. **Configure Database & Redis** (update `application.properties`)
+   - Build the Docker image:
+  ```sh
+   docker build -t my-redis . 
+  ```
+  - Run the Docker container:
+  ```sh
+     docker run -d -p 6379:6379 --name redis-server my-redis
+  ```
 3. **Build & Run the Application**
    ```sh
    mvn clean install
