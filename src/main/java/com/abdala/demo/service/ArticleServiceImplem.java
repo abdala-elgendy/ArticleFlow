@@ -14,6 +14,8 @@ import com.abdala.demo.repository.UserRepo;
 import com.abdala.demo.dto.ArticleDTO;
 import com.abdala.demo.dto.CreateArticleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.abdala.demo.mapper.ArticleMapper;
 
@@ -54,6 +56,7 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
+    @CacheEvict(value = "articles")
     public void deleteArticle(Long id) {
         articleRepository.deleteById(id);
     }
@@ -66,6 +69,7 @@ public class ArticleServiceImplem implements ArticleService {
     }
 
     @Override
+    @Cacheable(value="articles")
     public List<ArticleDTO> getAllArticles() {
         List<Article> articles = articleRepository.findAll();
         return articles.stream()

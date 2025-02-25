@@ -31,6 +31,11 @@ public class ArticleController {
     private ArticleRepo articleRepo;
 
 
+    @GetMapping("/all")
+    public List<ArticleDTO> getAllArticles() {
+        return articleService.getAllArticles();
+    }
+
     @GetMapping("/tag/{tagName}")
     public List<ArticleDTO> getArticlesByTagName(@PathVariable String tagName) {
         return articleService.getArticlesByTagName(tagName);
