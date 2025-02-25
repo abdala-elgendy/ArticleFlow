@@ -33,7 +33,8 @@ public enum Role {
                   NORMALUSER_DELETE,
                   NORMALUSER_CREATE
           )
-  )
+  ),
+   ROLE_USER(Collections.emptySet())
   ;
 
   @Getter

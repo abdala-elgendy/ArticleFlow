@@ -9,7 +9,9 @@ spring:
          expiration: 604800000 # 7 days
   main:
     allow-bean-definition-overriding: true
-
+  jackson:
+    serialization :
+       WRITE_DATES_AS_TIMESTAMPS: false
   datasource:
     url: jdbc:mysql://localhost:3306/realworld?serverTimezone=UTC
     username: springstudent

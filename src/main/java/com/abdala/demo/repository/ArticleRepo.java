@@ -20,6 +20,8 @@ public interface ArticleRepo extends JpaRepository<Article, Long> {
     @Query("select a from Article a where a.author.id=:authorId")
     List<Article> findByAuthorId(Long authorId);
 
+    @Query("select a from Article a")
+    List<Article> findAll();
 
 //    @Query("select x from Article a join User x on x.id=:authorId")
 //   User getAuthorOfArticle(Long authorId);
