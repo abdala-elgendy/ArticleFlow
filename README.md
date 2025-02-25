@@ -1,7 +1,7 @@
-# RealWorld API - Spring Boot Implementation
+# ArticleFlow API - Spring Boot Implementation
 
 ## Overview
-This project is a **Spring Boot implementation** of the [RealWorld API](https://realworld-docs.netlify.app/docs/specs/backend-specs/introduction). It provides a **robust backend** for a blogging platform, handling authentication, article management, user interactions, and more.
+**Article Flow**  provides a **robust backend** for a blogging platform, handling authentication, article management, user interactions, and more.
 
 ## Features
 - **User Authentication & Authorization** (JWT-based security)
@@ -14,7 +14,7 @@ This project is a **Spring Boot implementation** of the [RealWorld API](https://
 - **Redis Caching for Performance Optimization**
 
 ## Technologies Used
-- **Java 17**
+- **Java 17+**
 - **Spring Boot 3**
 - **Spring Security (JWT Authentication)**
 - **Spring Data JPA (MySQL Database)**
@@ -59,8 +59,8 @@ This project is a **Spring Boot implementation** of the [RealWorld API](https://
 ## How to Run
 1. **Clone the Repository**
    ```sh
-git clone https://github.com/abdala-elgendy/ArticleFlow.git
-cd ArticleFlow
+   git clone https://github.com/abdala-elgendy/ArticleFlow.git
+   cd ArticleFlow
    ```
 2. **Configure Database & Redis** (update `application.properties`)
 3. **Build & Run the Application**
@@ -68,6 +68,13 @@ cd ArticleFlow
    mvn clean install
    mvn spring-boot:run
    ```
+Contributing
+
+Feel free to open issues and submit pull requests! 🚀
+
+License
+
+This project is licensed under the MIT License.
 
 ## Contributing
 Feel free to open issues and submit pull requests! 🚀
