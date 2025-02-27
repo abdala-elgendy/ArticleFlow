@@ -76,17 +76,9 @@
    mvn clean install
    mvn spring-boot:run
    ```
-Contributing
-
-Feel free to open issues and submit pull requests! 🚀
-
-License
-
-This project is licensed under the MIT License.
 
 ## Contributing
 Feel free to open issues and submit pull requests! 🚀
 
-## License
-This project is licensed under the [MIT License](LICENSE).
+
 
