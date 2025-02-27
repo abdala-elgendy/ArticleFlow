@@ -135,7 +135,9 @@ private Role role;
     }
 
 
-
+    public void setName(String name) {
+        this.Name=name;
+    }
 }
 
 
