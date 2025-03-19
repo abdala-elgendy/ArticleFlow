@@ -12,6 +12,7 @@ import java.util.List;
 public interface ArticleFavoriteRepo extends JpaRepository<ArticleFavorite, Long> {
 
     List<ArticleFavorite> findByUserId(Long userId);
+
     boolean existsByUserIdAndArticleId(Long userId, Long articleId);
 
     @Modifying

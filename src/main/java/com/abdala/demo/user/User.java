@@ -1,7 +1,5 @@
 package com.abdala.demo.user;
 
-
-
 import com.abdala.demo.entity.Article;
 import com.abdala.demo.token.Token;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,53 +16,41 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 @AllArgsConstructor
 @Builder
 @Getter
 @Setter
 public class User implements UserDetails {
 
-
-
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-
 
     private Long id;
 
-    @Column(name="bio")
+    @Column(name = "bio")
     private String bio;
 
-    @Column(name="password",nullable = false)
+    @Column(name = "password", nullable = false)
     @JsonIgnore
     private String password;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String Name;
 
     @Email
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
-    @Column(name="created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-
-
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Article> articles = new HashSet<>();
 
-
-
-
     @ManyToMany
-    @JoinTable(
-            name = "user_followings",
-            joinColumns = @JoinColumn(name = "follower_id"),
-            inverseJoinColumns = @JoinColumn(name = "followee_id")
-    )
+    @JoinTable(name = "user_followings", joinColumns = @JoinColumn(name = "follower_id"), inverseJoinColumns = @JoinColumn(name = "followee_id"))
     @JsonIgnore
     private Set<User> following = new HashSet<>();
 
@@ -73,16 +59,16 @@ public class User implements UserDetails {
     private Set<User> followers = new HashSet<>();
 
     public User(String name, String email) {
-        this.Name=name;
-        this.email=email;
+        this.Name = name;
+        this.email = email;
 
     }
+
     @Enumerated(EnumType.STRING)
-private Role role;
+    private Role role;
 
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
-
 
     public User() {
 
@@ -99,9 +85,10 @@ private Role role;
         this.following.remove(userToUnfollow);
         userToUnfollow.getFollowers().remove(this);
     }
+
     @Override
     public String toString() {
-        return "User: [id=" + id +" , bio= "+bio + ", Name=" + Name +  ", email=" + email + "]";
+        return "User: [id=" + id + " , bio= " + bio + ", Name=" + Name + ", email=" + email + "]";
     }
 
     @Override
@@ -134,19 +121,7 @@ private Role role;
         return true;
     }
 
-
     public void setName(String name) {
-        this.Name=name;
+        this.Name = name;
     }
 }
-
-
-
-
-
-
-
-
-
-
-

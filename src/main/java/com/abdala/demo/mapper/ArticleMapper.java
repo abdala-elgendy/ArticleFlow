@@ -31,6 +31,7 @@ public class ArticleMapper {
 
         return article;
     }
+
     public ArticleCommentDTO toDTO(ArticleComment articleComment) {
         ArticleCommentDTO dto = new ArticleCommentDTO();
         dto.setArticleId(articleComment.getArticle().getId());

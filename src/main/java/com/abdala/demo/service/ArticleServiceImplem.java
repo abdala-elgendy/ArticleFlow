@@ -36,7 +36,6 @@ public class ArticleServiceImplem implements ArticleService {
     @Autowired
     private UserRepo userRepo;
 
-
     @Override
     public ArticleDTO createArticle(CreateArticleDTO createArticleDTO) {
         Article article = articleMapper.toEntity(createArticleDTO);
@@ -63,36 +62,29 @@ public class ArticleServiceImplem implements ArticleService {
 
     @Override
     public ArticleDTO getArticleById(Long id) {
-        return articleRepository.findById(id)
-                .map(articleMapper::toDTO)
+        return articleRepository.findById(id).map(articleMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("Article not found"));
     }
 
     @Override
-    @Cacheable(value="articles")
+    @Cacheable(value = "articles")
     public List<ArticleDTO> getAllArticles() {
         List<Article> articles = articleRepository.findAll();
-        return articles.stream()
-                .map(articleMapper::toDTO)
-                .collect(Collectors.toList());
+        return articles.stream().map(articleMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
     public List<ArticleDTO> getArticlesofAuthor(Long id) {
         // return articleRepository.findByAuthorId(authorId);
 
-        return articleRepository.findArticleByAuthorId(id)
-                .stream()
-                .map(articleMapper::toDTO)
+        return articleRepository.findArticleByAuthorId(id).stream().map(articleMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<ArticleCommentDTO> getArticleComments(Long articleId) {
         List<ArticleComment> articleComments = articleCommentRepo.findCommentsByArticleId(articleId);
-        return articleComments.stream()
-                .map(articleMapper::toDTO)
-                .collect(Collectors.toList());
+        return articleComments.stream().map(articleMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -103,9 +95,7 @@ public class ArticleServiceImplem implements ArticleService {
 
     @Override
     public List<ArticleDTO> getArticlesByTagName(String tagName) {
-        return articleRepository.findArticlesByTagName(tagName)
-                .stream()
-                .map(articleMapper::toDTO)
+        return articleRepository.findArticlesByTagName(tagName).stream().map(articleMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
@@ -121,9 +111,7 @@ public class ArticleServiceImplem implements ArticleService {
     public List<ArticleDTO> findByContentContainingIgnoreCase(String keyword) {
         List<Article> articles = articleRepository.findByContentContainingIgnoreCase(keyword);
 
-        return articles.stream()
-                .map(articleMapper::toDTO)
-                .collect(Collectors.toList());
+        return articles.stream().map(articleMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -135,6 +123,5 @@ public class ArticleServiceImplem implements ArticleService {
         ArticleComment savedComment = articleCommentRepo.save(articleComment);
         return articleMapper.toDTO(savedComment);
     }
-
 
 }

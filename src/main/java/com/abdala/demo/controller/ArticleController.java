@@ -30,7 +30,6 @@ public class ArticleController {
     @Autowired
     private ArticleRepo articleRepo;
 
-
     @GetMapping("/all")
     public List<ArticleDTO> getAllArticles() {
         return articleService.getAllArticles();
@@ -41,12 +40,10 @@ public class ArticleController {
         return articleService.getArticlesByTagName(tagName);
     }
 
-
     @PostMapping("/create")
     public ArticleDTO createArticle(@RequestBody CreateArticleDTO createArticleDTO) {
         return articleService.createArticle(createArticleDTO);
     }
-
 
     @GetMapping("/{id}")
     public ArticleDTO getArticleById(@PathVariable Long id) {
@@ -61,7 +58,8 @@ public class ArticleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ArticleDTO> updateArticle(@PathVariable Long id, @RequestBody CreateArticleDTO updateArticleDTO) {
+    public ResponseEntity<ArticleDTO> updateArticle(@PathVariable Long id,
+            @RequestBody CreateArticleDTO updateArticleDTO) {
         ArticleDTO updatedArticle = articleService.updateArticle(id, updateArticleDTO);
         return ResponseEntity.ok(updatedArticle);
     }
@@ -85,7 +83,7 @@ public class ArticleController {
         return ResponseEntity.ok(result);
     }
 
-    //ok
+    // ok
     @GetMapping("/slug/{slug}")
     public ArticleDTO getByArticleSlug(@PathVariable String slug) {
         Article article = articleRepo.findBySlug(slug)
@@ -105,14 +103,16 @@ public class ArticleController {
     }
 
     @PostMapping("/{articleId}/comment")
-     public ResponseEntity<ArticleCommentDTO> createComment(@PathVariable Long articleId, @RequestBody ArticleCommentDTO articleCommentDTO) {
+    public ResponseEntity<ArticleCommentDTO> createComment(@PathVariable Long articleId,
+            @RequestBody ArticleCommentDTO articleCommentDTO) {
         ArticleCommentDTO comment = articleService.createComment(articleId, articleCommentDTO);
         return ResponseEntity.ok(comment);
     }
+
     @GetMapping("/search/{query}")
     public ResponseEntity<List<ArticleDTO>> searchArticles(@PathVariable String query) {
         List<ArticleDTO> articles = articleService.findByContentContainingIgnoreCase(query);
-        if(articles.isEmpty()) {
+        if (articles.isEmpty()) {
             throw new RuntimeException("No articles found with keyword: " + query);
         }
         return ResponseEntity.ok(articles);

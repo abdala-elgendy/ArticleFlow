@@ -1,6 +1,5 @@
 package com.abdala.demo.entity;
 
-
 import jakarta.persistence.*;
 // import org.springframework.security.core.userdetails.User;
 import com.abdala.demo.user.User;

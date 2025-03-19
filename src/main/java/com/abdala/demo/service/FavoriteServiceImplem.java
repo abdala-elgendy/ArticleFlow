@@ -34,8 +34,7 @@ public class FavoriteServiceImplem implements FavoriteService {
         if (favoriteRepository.existsByUserIdAndArticleId(userId, articleId)) {
             return; // Already favorited
         }
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new RuntimeException("Article not found"));
 
@@ -53,9 +52,6 @@ public class FavoriteServiceImplem implements FavoriteService {
     @Override
     public List<ArticleDTO> getFavoritesByUser(Long userId) {
         List<ArticleFavorite> favorites = favoriteRepository.findByUserId(userId);
-        return favorites.stream()
-                .map(fav -> articleMapper.toDTO(fav.getArticle()))
-                .collect(Collectors.toList());
+        return favorites.stream().map(fav -> articleMapper.toDTO(fav.getArticle())).collect(Collectors.toList());
     }
 }
-

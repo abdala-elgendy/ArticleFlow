@@ -8,4 +8,3 @@ public class UpdateUserDTO {
     private String bio;
     private String email;
 }
-

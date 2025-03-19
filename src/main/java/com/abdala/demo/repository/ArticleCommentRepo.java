@@ -1,7 +1,5 @@
 package com.abdala.demo.repository;
 
-
-
 import com.abdala.demo.entity.ArticleComment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,10 +10,11 @@ import java.util.Optional;
 
 @Repository
 public interface ArticleCommentRepo extends JpaRepository<ArticleComment, Long> {
-   @Query("select ac from ArticleComment ac where ac.article.id = :articleId")
+    @Query("select ac from ArticleComment ac where ac.article.id = :articleId")
     List<ArticleComment> findCommentsByArticleId(Long articleId);
 
     void deleteAll();
- @Query("select ac from ArticleComment ac where ac.id = :commentId")
-  ArticleComment findSpecificComment(Long commentId);
+
+    @Query("select ac from ArticleComment ac where ac.id = :commentId")
+    ArticleComment findSpecificComment(Long commentId);
 }

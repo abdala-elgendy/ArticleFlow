@@ -16,9 +16,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Service
-public class UserServiceImplem implements UserService{
+public class UserServiceImplem implements UserService {
 
     @Autowired
     private UserRepo userRepository;
@@ -33,7 +32,6 @@ public class UserServiceImplem implements UserService{
     private ArticleMapper articleMapper;
     @Autowired
     private UserRepo userRepo;
-
 
     @Override
     public void followUser(Long followerId, Long followedId) {
@@ -59,29 +57,24 @@ public class UserServiceImplem implements UserService{
     public List<UserDTO> getFollowers(Long followerId) {
         List<User> followers = userRepository.findFollowersByUserId(followerId);
 
-        return followers.stream()
-                .map(UserMapper::toDto)
-                .collect(Collectors.toList());
+        return followers.stream().map(UserMapper::toDto).collect(Collectors.toList());
     }
 
-
-
     @Override
-    public String createUser(CreateUserDTO userRequest){
+    public String createUser(CreateUserDTO userRequest) {
         User user = userMapper.toEntity(userRequest);
-       userRepository.save(user);
+        userRepository.save(user);
         return "User created successfully";
     }
 
     @Override
     public void deleteUser(Long userId) {
-     userRepository.deleteById(userId);
+        userRepository.deleteById(userId);
     }
 
     @Override
     public UserDTO updateUser(Long id, UpdateUserDTO user) {
         return null;
-
 
     }
 
@@ -96,13 +89,9 @@ public class UserServiceImplem implements UserService{
     public List<ArticleDTO> getUserArticles(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
-        List<Article> articles = (List<Article>)
-                articleRepository.findArticleByAuthorId(userId);
-        return articles.stream()
-                .map(articleMapper::toDTO)
-                .collect(Collectors.toList());
+        List<Article> articles = (List<Article>) articleRepository.findArticleByAuthorId(userId);
+        return articles.stream().map(articleMapper::toDTO).collect(Collectors.toList());
     }
-
 
     @Override
     public UserProfileDTO getUserProfile(Long userId) {
@@ -123,17 +112,6 @@ public class UserServiceImplem implements UserService{
     private List<UserDTO> getFollowing(Long userId) {
         List<User> followers = userRepository.findFollowingByUserId(userId);
 
-        return followers.stream()
-                .map(UserMapper::toDto)
-                .collect(Collectors.toList());
+        return followers.stream().map(UserMapper::toDto).collect(Collectors.toList());
     }
 }
-
-
-
-
-
-
-
-
-

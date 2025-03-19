@@ -14,4 +14,3 @@ public class CreateUserDTO {
     private LocalDateTime createdAt;
 
 }
-

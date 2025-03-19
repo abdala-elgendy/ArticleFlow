@@ -20,14 +20,10 @@ public class UserMapper {
         dto.setBio(user.getBio());
 
         dto.setCreatedAt(user.getCreatedAt());
-        Set<Long> followerIds = user.getFollowers().stream()
-                .map(User::getId)
-                .collect(Collectors.toSet());
+        Set<Long> followerIds = user.getFollowers().stream().map(User::getId).collect(Collectors.toSet());
         UserDTO.setFollowerIds(followerIds);
 
-        Set<Long> followingIds = user.getFollowing().stream()
-                .map(User::getId)
-                .collect(Collectors.toSet());
+        Set<Long> followingIds = user.getFollowing().stream().map(User::getId).collect(Collectors.toSet());
         UserDTO.setFollowingIds(followingIds);
         return dto;
     }
@@ -42,7 +38,4 @@ public class UserMapper {
         return user;
     }
 
-
-
 }
-

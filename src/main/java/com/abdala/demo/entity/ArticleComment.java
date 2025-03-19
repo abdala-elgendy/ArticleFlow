@@ -1,20 +1,33 @@
 package com.abdala.demo.entity;
 
-
 import com.abdala.demo.user.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.antlr.v4.runtime.misc.NotNull;
+
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="article_comment")
-
+@Table(name = "article_comment")
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ArticleComment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "content")
     private String content;
+
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @ManyToOne
@@ -22,52 +35,12 @@ public class ArticleComment {
     private Article article;
 
     @ManyToOne
-    @JoinColumn(name = "author_id")
-    private User author;
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public ArticleComment() {
-        this.createdAt = LocalDateTime.now();
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
+    // Custom builder method for creating a new comment with default creation time
+    public static ArticleCommentBuilder builder() {
+        return new ArticleCommentBuilder()
+                .createdAt(LocalDateTime.now());
     }
 }
-

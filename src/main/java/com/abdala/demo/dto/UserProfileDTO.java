@@ -3,6 +3,7 @@ package com.abdala.demo.dto;
 import lombok.Data;
 
 import java.util.List;
+
 @Data
 public class UserProfileDTO {
     private UserDTO user;

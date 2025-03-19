@@ -19,4 +19,3 @@ public class ArticleDTO implements Serializable {
     private LocalDateTime createdAt;
 
 }
-
